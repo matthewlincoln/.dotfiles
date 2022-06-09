@@ -1,0 +1,133 @@
+# mbsyncrc based on
+# http://pragmaticemacs.com/emacs/migrating-from-offlineimap-to-mbsync-for-mu4e/
+# this, in turn, is based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+
+# ACCOUNT INFORMATION
+# NOTE: This config assumes that an app-specific password for Gmail is stored in
+# the keychain. This can be done with the following command:
+# security add-internet-password -a matthew.lincoln@gmail.com \
+#   -l imap.gmail.com -r imap -s imap.gmail.com -w app-specific-password -U
+IMAPAccount gmail
+Host imap.gmail.com
+User matthew.lincoln@gmail.com
+PassCmd "security find-internet-password -a matthew.lincoln@gmail.com -s imap.gmail.com -w"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1
+
+# THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE
+# - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE
+#   SPECIFICATION OF AN IMAP ACCOUNT)
+# - THE LOCAL STORAGE IS WHERE WE STORE THE EMAIL ON OUR COMPUTER
+
+# REMOTE STORAGE (USE THE IMAP ACCOUNT SPECIFIED ABOVE)
+IMAPStore gmail-remote
+Account gmail
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
+MaildirStore gmail-local
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/INBOX
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel gmail-inbox
+Far :gmail-remote:
+Near :gmail-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-trash
+Far :gmail-remote:"[Gmail]/Trash"
+Near :gmail-local:"[Gmail].Trash"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-sent
+Far :gmail-remote:"[Gmail]/Sent Mail"
+Near :gmail-local:"[Gmail].Sent Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-drafts
+Far :gmail-remote:"[Gmail]/Drafts"
+Near :gmail-local:"[Gmail].Drafts"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-all
+Far :gmail-remote:"[Gmail]/All Mail"
+Near :gmail-local:"[Gmail].All Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-starred
+Far :gmail-remote:"[Gmail]/Starred"
+Near :gmail-local:"[Gmail].Starred"
+Create Both
+Expunge Both
+SyncState *
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group gmail
+Channel gmail-inbox
+Channel gmail-sent
+Channel gmail-trash
+Channel gmail-all
+Channel gmail-starred
+
+
+
+# Yale email server settings obtained from ITS:
+# IMAP incoming outlook.office365.com Port number 993 encryption method SSL
+# SMTP outgoing smtp.office365.com Port number 587 encryption method TLS
+
+# NOTE: This config assumes that a password for Yale is stored in the keychain.
+# This can be done with the following command:
+
+# security add-internet-password -a matthew.lincoln@yale.edu \
+#   -l outlook.office365.com -r imap -s outlook.office365.com -w my-password -U
+IMAPAccount yale
+Host outlook.office365.com
+User matthew.lincoln@yale.edu
+PassCmd "security find-internet-password -a matthew.lincoln@yale.edu -l outlook.office365.com -s outlook.office365.com -w"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1
+
+IMAPStore yale-remote
+Account yale
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
+MaildirStore yale-local
+Path ~/.mail/yale/
+Inbox ~/.mail/yale/INBOX
+SubFolders Verbatim
+
+Channel yale
+Far :yale-remote:
+Near :yale-local:
+# Patterns * !Archives
+Patterns *
+Create Both
+Expunge Both
+SyncState *
