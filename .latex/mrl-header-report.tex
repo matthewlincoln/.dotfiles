@@ -1,0 +1,177 @@
+\usepackage[margin=0.75in]{geometry}
+
+% Configure Arno Pro as main font. Adapted from https://tex.stackexchange.com/questions/62603/how-to-choose-a-specific-weight-from-a-font-family-using-fontspec-and-xelatex
+\usepackage{fontspec}
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
+\setmainfont{Arno Pro}
+  [Ligatures=TeX,
+   UprightFont=*,
+   ItalicFont={* Italic},
+   BoldFont={* Bold},
+   BoldItalicFont={* Bold Italic},
+   FontFace={sb}{n}{* Semibold},
+   FontFace={sb}{it}{* Semibold Italic}
+   ]
+\DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+
+% \setsansfont{Open Sans}
+%   [Ligatures=TeX,
+%    UprightFont={* Regular},
+%    ItalicFont={* Italic},
+%    BoldFont={* Bold},
+%    BoldItalicFont={* Bold Italic},
+%    FontFace = {l}{n}{* Light},
+%    FontFace = {l}{it}{* Light Italic},
+%    FontFace = {sb}{n}{* SemiBold},
+%    FontFace = {sb}{it}{* SemiBold Italic},
+%    FontFace = {eb}{n}{* ExtraBold},
+%    FontFace = {eb}{it}{* ExtraBold Italic}
+%   ]
+\setsansfont{Source Sans Pro}
+  [Ligatures=TeX,
+   % Scale=MatchUppercase,
+   Scale=1.008249312557287,
+   UprightFont={* Regular},
+   ItalicFont={* Italic},
+   BoldFont={* Bold},
+   BoldItalicFont={* Bold Italic},
+   FontFace={l}{n}{* Light},
+   FontFace={l}{it}{* Light Italic},
+   FontFace={sb}{n}{* SemiBold},
+   FontFace={sb}{it}{* SemiBold Italic},
+   FontFace={eb}{n}{* Black},
+   FontFace={eb}{it}{* Black Italic}
+  ]
+\DeclareRobustCommand{\ltseries}{\fontseries{l}\selectfont}
+\DeclareTextFontCommand{\textlt}{\ltseries}
+\DeclareRobustCommand{\ebseries}{\fontseries{eb}\selectfont}
+\DeclareTextFontCommand{\texteb}{\ebseries}
+
+% \setmonofont{Courier}[Scale=MatchLowercase]
+% \setmonofont{Source Code Pro Medium}[Scale=MatchUppercase]
+% \setmonofont{Anonymous Pro}[Scale=MatchUppercase]
+\setmonofont{IBM Plex Mono Regular}[Scale=MatchUppercase]
+% \setmonofont{IBM Plex Mono Regular}[Scale=1.008249312557287] % use postscript pt
+
+% Define theme colour:
+\usepackage[dvipsnames]{xcolor}
+\definecolor{themecolour}{HTML}{00205B} % Pantone 281C
+
+% Change the title font:
+\usepackage{titling}
+\pretitle{\begin{center}\Large\sffamily\bfseries\color{themecolour}}
+% \posttitle{\par\end{center}\vspace{-2ex}}
+\posttitle{\par\end{center}\vspace{20ex}}
+\preauthor{\begin{center}\vspace{15\baselineskip}\large}
+\postauthor{\normalsize\end{center}\vspace{-5ex}}
+\predate{\begin{center}\large}
+\postdate{\end{center}\normalsize}
+
+% Adjust paragraph spacing:
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+
+% Format table of contents:
+\usepackage[titles]{tocloft}
+% Adjust spacing:
+\setlength{\cftbeforechapskip}{2\parskip}
+\setlength{\cftbeforesecskip}{1\parskip}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsubsecindent}{0pt}
+% Adjust fonts:
+\renewcommand{\cfttoctitlefont}{\LARGE\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftloftitlefont}{\LARGE\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftlottitlefont}{\LARGE\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftchapfont}{\large\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftsecfont}{\normalsize\sffamily\bfseries}
+\renewcommand{\cftsubsecfont}{\normalsize\sffamily\itshape}
+
+% Use old style numbers for page numbers:
+\renewcommand{\cftchappagefont}{\addfontfeatures{Numbers=OldStyle}}
+\renewcommand{\cftsecpagefont}{\addfontfeatures{Numbers=OldStyle}}
+\renewcommand{\cftsubsecpagefont}{\addfontfeatures{Numbers=OldStyle}}
+\renewcommand{\cftsubsubsecpagefont}{\addfontfeatures{Numbers=OldStyle}}
+
+% Style section headers:
+\renewcommand{\chaptername}{Section}
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Large\sffamily\bfseries\color{themecolour}}{\chaptertitlename\ \thechapter}{12pt}{\LARGE}
+
+\titleformat{\section}{\large\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\parskip}
+
+\titleformat{\subsection}{\normalsize\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{0.5\baselineskip}{-\parskip}
+
+\titleformat{\subsubsection}{\normalsize\sffamily\bfseries\itshape\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\subsubsection}{0pt}{0.5\baselineskip}{-\parskip}
+
+\titleformat{\paragraph}[runin]{\normalsize\bfseries\color{themecolour}}{\thetitle}{}{}
+\titlespacing{\paragraph}{0pt}{0pt}{1ex}
+\titleformat{\subparagraph}[runin]{\normalsize\bfseries\itshape\color{themecolour}}{\thetitle}{}{}
+\titlespacing{\subparagraph}{0pt}{0pt}{1ex}
+
+% Reduce spacing in list environments:
+\usepackage{enumitem}
+% Align enumerate and itemize items to left margin, remove parsep:
+\setlist[enumerate,itemize]{
+  itemsep=0pt,
+  leftmargin=*,
+  topsep=0pt,
+  parsep=0pt}
+
+% Format footnotes:
+\usepackage[hang,flushmargin]{footmisc}
+% Remove rule from footnotes:
+% \renewcommand*\footnoterule{}
+
+\raggedbottom
+
+% Enable hyperlinks for paper URLs:
+\usepackage{hyperref}
+\hypersetup{
+  hyperfootnotes=false,
+  colorlinks=true,
+  citecolor=themecolour,
+  urlcolor=themecolour,
+  linkcolor=. % use text colour for links
+}
+
+% Enable author affiliations:
+\usepackage{authblk}
+
+% Allow tables to be scaled:
+\usepackage{tabularx}
+
+% Change font for figure labels:
+\usepackage[font=small,
+            labelfont={color=themecolour,bf,sf},
+            textfont=sf,
+            justification=justified,singlelinecheck=false]{caption}
+\captionsetup[table]{skip=4pt}
+
+% Change the table font:
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\sffamily}
+\AtBeginEnvironment{tabular}{\sffamily}
+\AtBeginEnvironment{tabularx}{\sffamily}
+
+% Redefine page numbers:
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\oldstylenums{\thepage}}
+  % \renewcommand{\headrulewidth}{0pt}%
+  % \renewcommand{\footrulewidth}{0pt}%
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\oldstylenums{\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage{booktabs}
