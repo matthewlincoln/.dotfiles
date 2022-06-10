@@ -1,0 +1,47 @@
+#+title:My Dotfiles
+#+author:Matthew R Lincoln
+#+email:matthew.lincoln@gmail.com
+
+* Introduction
+These are my dotfiles, designed for macOS. They are stored in a bare git repository, using the method outlined [[https://www.atlassian.com/git/tutorials/dotfiles][here]]. The bare repository uses =$HOME= as the work tree, so its structure mimics the structure of the home directory.
+
+NOTE: Cloning to a new system can result in git recursion errors. To avoid this, the global =.gitignore= includes the repo folder.
+
+* Setup
+To make commits or otherwise manage the repository, we use the alias =dotfiles= in place of =git=. This alias sets =--git-dir=$HOME/.dotfiles/= and =--work-tree=$HOME=, allowing addition of files outside of the core =$HOME/.dotfiles= directory.
+
+To clone to a new system, first define the =dotfiles= alias and ensure that the repo directory is included in the global =.gitignore=:
+
+#+begin_src zsh
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+echo ".dotfiles" >> .gitignore
+#+end_src
+
+We then clone the dotfiles into a /bare/ repository and check out:
+
+#+begin_src zsh
+git clone --bare .dotfiles git@github.com:matthewlincoln/.dotfiles.git
+dotfiles checkout
+#+end_src
+
+More details are provided in the original [[https://www.atlassian.com/git/tutorials/dotfiles][post]].
+
+* Contents
+The following configuration files are included:
+
+| File                          | Comment                                      |
+|-------------------------------+----------------------------------------------|
+| .doom.d/                      | doom-emacs configuration                     |
+| .doom.d/config.el             |                                              |
+| .doom.d/init.el               |                                              |
+| .doom.d/packages.el           |                                              |
+| .latex/                       | LaTeX header files                           |
+| .latex/author.tex             | My author details for org-mode export        |
+| .latex/mrl-header-article.tex | org-mode export header for article class     |
+| .latex/mrl-header-report.tex  | org-mode export header for report class      |
+| .ssh/config                   | ssh configuration                            |
+| .gitconfig                    | Global git configuration                     |
+| .gitignore                    | Prevent this repository from tracking itself |
+| .mbsyncrc                     | mbsync configuration                         |
+| .zprofile                     | zsh configuration                            |
+| .zshrc                        | zsh configuration                            |
