@@ -481,3 +481,8 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+;; Highlight lines longer than 100 characters in programming modes:
+(setq whitespace-line-column 100)
+(setq whitespace-style '(face tabs tab-mark lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
