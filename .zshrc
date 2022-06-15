@@ -1,3 +1,6 @@
+# Add ~/bin to path:
+path+=~/bin
+
 # Set aliases:
 alias ll="ls -FGlAhp"
 alias llr="ls -FGlAhprt"
