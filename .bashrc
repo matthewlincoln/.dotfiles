@@ -1,3 +1,6 @@
+# Mimic macOS default prompt for zsh:
+PS1="\u@\h \W \$ "
+
 # Add ~/bin to path:
 export PATH="$PATH:~/bin"
 

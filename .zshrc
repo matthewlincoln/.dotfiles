@@ -1,3 +1,6 @@
+# Use macOS default prompt for zsh:
+PS1="%n@%m %1~ %# "
+
 # Add ~/bin to path:
 path+=~/bin
 
