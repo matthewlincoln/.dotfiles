@@ -115,6 +115,7 @@
       "s-k" #'kill-whole-line
       "s-d" #'mc/mark-next-like-this-word
       "s-f" #'isearch-forward
+      "s-o" #'other-window
       :map isearch-mode-map "s-f" #'isearch-repeat-forward
       :map isearch-mode-map "s-g" #'isearch-repeat-forward)
 
@@ -486,3 +487,7 @@
 (setq whitespace-line-column 100)
 (setq whitespace-style '(face tabs tab-mark lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode)
+
+;; Configure vterm
+(after! vterm
+  (setq vterm-shell "bash"))
