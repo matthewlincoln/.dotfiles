@@ -36,6 +36,8 @@ Finally, configure to track the main branch:
 dotfiles push --set-upstream origin main
 #+end_src
 
+The reposotory can now be managed with =dotfiles add=, =dotfiles commit= etc.
+
 More details are provided in the original [[https://www.atlassian.com/git/tutorials/dotfiles][post]].
 
 * Contents
