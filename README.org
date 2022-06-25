@@ -13,15 +13,27 @@ To make commits or otherwise manage the repository, we use the alias =dotfiles= 
 To clone to a new system, first define the =dotfiles= alias and ensure that the repo directory is included in the global =.gitignore=:
 
 #+begin_src zsh
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 echo ".dotfiles" >> .gitignore
 #+end_src
 
 We then clone the dotfiles into a /bare/ repository and check out:
 
 #+begin_src zsh
-git clone --bare .dotfiles git@github.com:matthewlincoln/.dotfiles.git
+git clone --bare git@github.com:matthewlincoln/.dotfiles.git $HOME/.dotfiles
 dotfiles checkout
+#+end_src
+
+We don't want to display untracked files (since the work-tree is =$HOME=):
+
+#+begin_src zsh
+dotfiles config --local status.showUntrackedFiles no
+#+end_src
+
+Finally, configure to track the main branch:
+
+#+begin_src zsh
+dotfiles push --set-upstream origin main
 #+end_src
 
 More details are provided in the original [[https://www.atlassian.com/git/tutorials/dotfiles][post]].
@@ -45,3 +57,5 @@ The following configuration files are included:
 | .mbsyncrc                     | mbsync configuration                         |
 | .zprofile                     | zsh configuration                            |
 | .zshrc                        | zsh configuration                            |
+| .bash_profile                 | bash configuration                           |
+| .bashrc                       | bash configuration                           |
