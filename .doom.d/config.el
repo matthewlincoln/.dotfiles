@@ -147,14 +147,19 @@
       "s-i" #'ess-indent-exp)
 
 ;; org-mode keybinds:
-;; (map! :map org-mode-map
-;;       ;; meta-left and -right to have non-org behaviour; org behaviour with shift:
-;;       "<S-M-left>" #'org-metaleft
-;;       "<S-M-right>" #'org-metaright
-;;       "<M-left>" #'backward-word
-;;       "<M-right>" #'forward-word
-;;       )
-
+(map! :after org
+      :map org-mode-map
+      ;; meta-left and -right to have non-org behaviour; org behaviour with shift:
+      "<S-M-left>" #'org-metaleft
+      "<S-M-right>" #'org-metaright
+      "<M-left>" #'backward-word
+      "<M-right>" #'forward-word
+      ;; macOS-like formatting:
+      "s-i" (cmd! (org-emphasize ?\/))
+      "s-b" (cmd! (org-emphasize ?\*))
+      "s-u" (cmd! (org-emphasize ?\_))
+      ;; insert reference:
+      "s-r" #'citar-insert-citation)
 
 ;; Theme settings:
 
@@ -228,7 +233,8 @@
       tramp-inline-compress-start-size 1000000)
 
 ;; Maximize emacs window on laptop:
-(if (string= (system-name) "gandalf.local")
+(if (or (string= (system-name) "gandalf")
+        (string= (system-name) "gandalf.local"))
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (progn (add-to-list 'default-frame-alist '(width . 250))
          (add-to-list 'default-frame-alist '(height . 70))
