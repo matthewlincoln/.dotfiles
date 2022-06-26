@@ -149,11 +149,13 @@
 ;; org-mode keybinds:
 (map! :after org
       :map org-mode-map
-      ;; meta-left and -right to have non-org behaviour; org behaviour with shift:
-      "<S-M-left>" #'org-metaleft
-      "<S-M-right>" #'org-metaright
+      ;; meta-left and -right to have non-org behaviour; org behaviour with ctrl-meta:
+      "<C-M-left>" #'org-metaleft
+      "<C-M-right>" #'org-metaright
       "<M-left>" #'backward-word
       "<M-right>" #'forward-word
+      "<S-M-left>" #'org-shiftcontrolleft
+      "<S-M-right>" #'org-shiftcontrolright
       ;; macOS-like formatting:
       "s-i" (cmd! (org-emphasize ?\/))
       "s-b" (cmd! (org-emphasize ?\*))
