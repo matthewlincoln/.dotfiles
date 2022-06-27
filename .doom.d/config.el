@@ -228,6 +228,11 @@
 (when (string= (system-name) "gandalf.local")
   (display-battery-mode))
 
+;; add word count to modeline in org-mode
+(after! doom-modeline
+  ;; (add-to-list 'doom-modeline-continuous-word-count-modes 'org-mode)
+  (setq doom-modeline-enable-word-count t)
+  (setq doom-modeline-modal-icon nil))
 
 (after! doom-themes
   (setq doom-themes-treemacs-theme "doom-colors")
