@@ -69,3 +69,5 @@
 (package! omnifocus-capture
   :recipe (:host github
            :repo "matthewlincoln/omnifocus-capture"))
+
+(package! focus)
