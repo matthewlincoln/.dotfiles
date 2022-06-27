@@ -157,11 +157,14 @@
       "<S-M-left>" #'org-shiftcontrolleft
       "<S-M-right>" #'org-shiftcontrolright
       ;; macOS-like formatting:
-      "s-i" (cmd! (org-emphasize ?\/))
-      "s-b" (cmd! (org-emphasize ?\*))
-      "s-u" (cmd! (org-emphasize ?\_))
+      :desc "Italic" "s-i" (cmd! (org-emphasize ?\/))
+      :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
+      :desc "Underline" "s-u" (cmd! (org-emphasize ?\_))
       ;; insert reference:
-      "s-r" #'citar-insert-citation)
+      :desc "Insert reference" "s-r" #'citar-insert-citation)
+
+;; refresh candidates cache when local .bib file changes:
+(citar-filenotify-setup '(LaTeX-mode-hook org-mode-hook))
 
 ;; Theme settings:
 
