@@ -163,8 +163,21 @@
       ;; insert reference:
       :desc "Insert reference" "s-r" #'citar-insert-citation)
 
-;; refresh candidates cache when local .bib file changes:
-(citar-filenotify-setup '(LaTeX-mode-hook org-mode-hook))
+;; customize citar:
+(after! citar
+  (setq citar-symbols
+    `((file ,(all-the-icons-faicon "file-o" :face 'all-the-icons-green :v-adjust -0.1) . " ")
+      (note ,(all-the-icons-material "speaker_notes" :face 'all-the-icons-blue :v-adjust -0.3) . " ")
+      (link ,(all-the-icons-octicon "link" :face 'all-the-icons-orange :v-adjust 0.01) . " ")))
+(setq citar-symbol-separator "  ")
+(setq citar-templates
+  '((main . "${author editor:30}     ${date year issued:4}     ${title:*}")
+    (suffix . "          ${=key= id:15}    ${=type=:12}")
+    (preview . "${author editor} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.\n")
+    (note . "Notes on ${author editor}, ${title}")))
+;; refresh citar candidates cache when local .bib file changes:
+(citar-filenotify-setup '(LaTeX-mode-hook org-mode-hook)))
+
 
 ;; Theme settings:
 
