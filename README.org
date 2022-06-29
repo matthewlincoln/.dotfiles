@@ -43,22 +43,25 @@ More details are provided in the original [[https://www.atlassian.com/git/tutori
 * Contents
 The following configuration files are included:
 
-| File                          | Comment                                                   |
-|-------------------------------+-----------------------------------------------------------|
-| .doom.d/                      | doom-emacs configuration                                  |
-| .doom.d/config.el             |                                                           |
-| .doom.d/init.el               |                                                           |
-| .doom.d/packages.el           |                                                           |
-| .latex/                       | LaTeX header files                                        |
-| .latex/author.tex             | My author details for org-mode export                     |
-| .latex/mrl-header-article.tex | org-mode export header for article class                  |
-| .latex/mrl-header-report.tex  | org-mode export header for report class                   |
-| .latex/linespacenums.tex      | header file to increase line spacing and add line numbers |
-| .ssh/config                   | ssh configuration                                         |
-| .gitconfig                    | Global git configuration                                  |
-| .gitignore                    | Prevent this repository from tracking itself              |
-| .mbsyncrc                     | mbsync configuration                                      |
-| .zprofile                     | zsh configuration                                         |
-| .zshrc                        | zsh configuration                                         |
-| .bash_profile                 | bash configuration                                        |
-| .bashrc                       | bash configuration                                        |
+| File                                 | Comment                                                   |
+|--------------------------------------+-----------------------------------------------------------|
+| .doom.d/                             | doom-emacs configuration                                  |
+| .doom.d/config.el                    |                                                           |
+| .doom.d/init.el                      |                                                           |
+| .doom.d/packages.el                  |                                                           |
+| .latex/                              | LaTeX header files                                        |
+| .latex/author.tex                    | My author details for org-mode export                     |
+| .latex/mrl-header-article.tex        | org-mode export header for article class                  |
+| .latex/mrl-header-report.tex         | org-mode export header for report class                   |
+| .latex/linespacenums.tex             | header file to increase line spacing and add line numbers |
+| .ssh/config                          | ssh configuration                                         |
+| .gitconfig                           | Global git configuration                                  |
+| .gitignore                           | Prevent this repository from tracking itself              |
+| .mbsyncrc                            | mbsync configuration                                      |
+| .zprofile                            | zsh configuration                                         |
+| .zshrc                               | zsh configuration                                         |
+| .bash_profile                        | bash configuration                                        |
+| .bashrc                              | bash configuration                                        |
+| .config/                             |                                                           |
+| .config/rstudio/rstudio-prefs.json   | RStudio configuration file                                |
+| .config/rstudio/Oceanic Next.rstheme | RStudio theme file                                        |
