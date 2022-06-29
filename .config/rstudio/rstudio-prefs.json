@@ -1,5 +1,42 @@
 {
+    "show_indent_guides": true,
     "initial_working_directory": "~",
     "editor_theme": "Oceanic Next",
-    "posix_terminal_shell": "bash"
+    "default_project_location": "~",
+    "pdf_previewer": "rstudio",
+    "wrap_tab_navigation": false,
+    "save_workspace": "never",
+    "always_save_history": false,
+    "reuse_sessions_for_project_links": true,
+    "panes": {
+        "quadrants": [
+            "Source",
+            "Console",
+            "TabSet1",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Connections",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer"
+        ],
+        "console_left_on_top": false,
+        "console_right_on_top": true
+    },
+    "console_double_click_select": true,
+    "margin_column": 100,
+    "posix_terminal_shell": "bash",
+    "knit_working_dir": "project",
+    "source_with_echo": true
 }
