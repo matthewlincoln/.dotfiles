@@ -3,7 +3,6 @@
     "initial_working_directory": "~",
     "editor_theme": "Oceanic Next",
     "default_project_location": "~",
-    "pdf_previewer": "rstudio",
     "wrap_tab_navigation": false,
     "save_workspace": "never",
     "always_save_history": false,
