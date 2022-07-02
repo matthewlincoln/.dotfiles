@@ -279,7 +279,8 @@
 ;; (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
 (after! highlight-indent-guides
-  (setq highlight-indent-guides-responsive t))
+  (setq highlight-indent-guides-responsive t)
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 
 ;; Use omnifocus-capture to send region to OmniFocus:
 (autoload 'send-region-to-omnifocus "omnifocus-capture" "Send region to OmniFocus" t)
