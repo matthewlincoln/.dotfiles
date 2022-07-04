@@ -501,8 +501,9 @@
 (after! latex
   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t)))
 
-;; Create option to use LaTeX report class without parts:
+;; Configure org LaTeX export:
 (after! ox-latex
+  ;; Create option to use LaTeX report class without parts:
   (add-to-list 'org-latex-classes
              '("report-noparts"
                "\\documentclass{report}"
@@ -511,7 +512,10 @@
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (setq org-latex-listings t)
+  (add-to-list 'org-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-latex-packages-alist '("" "color")))
 
 ;; Highlight lines longer than 100 characters in programming modes:
 (setq whitespace-line-column 100)
@@ -521,3 +525,7 @@
 ;; Configure vterm
 (after! vterm
   (setq vterm-shell "bash"))
+
+;; Configure vertico
+(after! vertico
+  (vertico-mouse-mode))
