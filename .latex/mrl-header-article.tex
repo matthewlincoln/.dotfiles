@@ -4,14 +4,23 @@
 \usepackage{fontspec}
 \defaultfontfeatures{Scale=MatchLowercase}
 \defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
-\setmainfont{Arno Pro}
+% \setmainfont{Arno Pro}
+%   [Ligatures=TeX,
+%    UprightFont=*,
+%    ItalicFont={* Italic},
+%    BoldFont={* Bold},
+%    BoldItalicFont={* Bold Italic},
+%    FontFace={sb}{n}{* Semibold},
+%    FontFace={sb}{it}{* Semibold Italic}
+%    ]
+\setmainfont{Source Serif 4}
   [Ligatures=TeX,
    UprightFont=*,
    ItalicFont={* Italic},
    BoldFont={* Bold},
    BoldItalicFont={* Bold Italic},
-   FontFace={sb}{n}{* Semibold},
-   FontFace={sb}{it}{* Semibold Italic}
+   FontFace={sb}{n}{* SemiBold},
+   FontFace={sb}{it}{* SemiBold Italic}
    ]
 \DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
 \DeclareTextFontCommand{\textsb}{\sbseries}
@@ -29,7 +38,7 @@
 %    FontFace = {eb}{n}{* ExtraBold},
 %    FontFace = {eb}{it}{* ExtraBold Italic}
 %   ]
-\setsansfont{Source Sans Pro}
+\setsansfont{Source Sans 3}
   [Ligatures=TeX,
    % Scale=MatchUppercase,
    Scale=1.008249312557287,
@@ -50,9 +59,9 @@
 \DeclareTextFontCommand{\texteb}{\ebseries}
 
 % \setmonofont{Courier}[Scale=MatchLowercase]
-% \setmonofont{Source Code Pro Medium}[Scale=MatchUppercase]
+\setmonofont{Source Code Pro Medium}[Scale=MatchUppercase]
 % \setmonofont{Anonymous Pro}[Scale=MatchUppercase]
-\setmonofont{IBM Plex Mono Regular}[Scale=MatchUppercase]
+% \setmonofont{IBM Plex Mono Regular}[Scale=MatchUppercase]
 
 % Define theme colour:
 \usepackage[dvipsnames]{xcolor}
