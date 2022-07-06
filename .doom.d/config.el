@@ -161,7 +161,9 @@
       :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
       :desc "Underline" "s-u" (cmd! (org-emphasize ?\_))
       ;; insert reference:
-      :desc "Insert reference" "s-r" #'citar-insert-citation)
+      :desc "Insert reference" "s-r" #'citar-insert-citation
+      ;; export to pdf:
+      :desc "Export to pdf" "s-p" #'org-latex-export-to-pdf)
 
 ;; customize citar:
 (after! citar
