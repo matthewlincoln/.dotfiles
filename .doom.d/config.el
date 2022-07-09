@@ -102,8 +102,9 @@
       "<C-M-right>" #'org-metaright
       "<M-left>" #'backward-word
       "<M-right>" #'forward-word
-      "<S-M-left>" #'org-shiftcontrolleft
-      "<S-M-right>" #'org-shiftcontrolright
+      ;; macOS-like word highlighting with shift-meta-arrows:
+      "<M-S-left>" #'org-shiftcontrolleft
+      "<M-S-right>" #'org-shiftcontrolright
       ;; macOS-like formatting:
       :desc "Italic" "s-i" (cmd! (org-emphasize ?\/))
       :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
