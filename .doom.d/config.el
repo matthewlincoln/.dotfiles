@@ -105,6 +105,8 @@
       ;; macOS-like word highlighting with shift-meta-arrows:
       "<M-S-left>" #'org-shiftcontrolleft
       "<M-S-right>" #'org-shiftcontrolright
+      "<M-S-down>" #'org-shiftdown
+      "<M-S-up>" #'org-shiftup
       ;; macOS-like formatting:
       :desc "Italic" "s-i" (cmd! (org-emphasize ?\/))
       :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
