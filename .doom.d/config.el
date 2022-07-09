@@ -3,12 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-;; Workaround suggested by Henrik to get beancount-mode to work. There was a
-;; keybind conflict in the module. This is meant to be temporary until a better
-;; solution can be found.
-;; (general-auto-unbind-keys)
-
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Matthew R Lincoln"
@@ -81,8 +75,9 @@
 
 
 (map! :after treemacs
+      :map treemacs-mode-map
       "s-p" #'treemacs-switch-workspace
-      :map treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
+      [mouse-1] #'treemacs-single-click-expand-action)
 
 (map! :map mc/keymap "<escape>" #'mc/keyboard-quit)
 
