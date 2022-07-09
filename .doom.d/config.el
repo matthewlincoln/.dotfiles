@@ -179,9 +179,18 @@
       display-time-format "%a %m/%d %H:%M"
       display-time-default-load-average nil)
 (display-time)
+
 ;; Only display battery mode when on laptop:
-(when (string= (system-name) "gandalf.local")
-  (display-battery-mode))
+;; (when (string= (system-name) "gandalf.local")
+;;   (display-battery-mode))
+;; Display battery status when this is available
+;; This code is taken from https://abdelhakbougouffa.pro/posts/config/#battery
+(after! doom-modeline
+  (let ((battery-str (battery)))
+     (unless (or (equal "Battery status not available" battery-str)
+                 (string-match-p (regexp-quote "unknown") battery-str)
+                 (string-match-p (regexp-quote "N/A") battery-str))
+      (display-battery-mode 1))))
 
 ;; add word count to modeline in org-mode
 (after! doom-modeline
