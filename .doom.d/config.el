@@ -94,6 +94,11 @@
 (map! :after ess
       "s-i" #'ess-indent-exp)
 
+
+;; customize org:
+(after! org
+  (setq org-M-RET-may-split-line t))
+
 ;; org-mode keybinds:
 (map! :after org
       :map org-mode-map
@@ -107,6 +112,9 @@
       "<M-S-right>" #'org-shiftcontrolright
       "<M-S-down>" #'org-shiftdown
       "<M-S-up>" #'org-shiftup
+      "s-<return>" #'org-meta-return
+      "M-s-<left>" #'org-do-promote
+      "M-s-<right>" #'org-do-demote
       ;; macOS-like formatting:
       :desc "Italic" "s-i" (cmd! (org-emphasize ?\/))
       :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
@@ -130,7 +138,6 @@
     (note . "Notes on ${author editor}, ${title}")))
 ;; refresh citar candidates cache when local .bib file changes:
 (citar-filenotify-setup '(LaTeX-mode-hook org-mode-hook)))
-
 
 ;; Theme settings:
 
