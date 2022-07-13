@@ -59,20 +59,24 @@
 ;; Evaluate lisp expressions with Command-E:
 (map! "s-e" #'eval-last-sexp)
 
-;; Some macOS- and Sublime-like settings:
-(map! "<s-up>" #'beginning-of-buffer
-      "<s-down>" #'end-of-buffer
+;; Some macOS- and Sublime-like global keybinds:
+(map! "s-<up>" #'beginning-of-buffer
+      "s-<down>" #'end-of-buffer
       "s-x" #'kill-region
       "s-c" #'kill-ring-save
       "s-v" #'yank
+      "s-q" #'save-buffers-kill-emacs
       "s-t" #'treemacs
       "s-k" #'kill-whole-line
-      "s-d" #'mc/mark-next-like-this-word
+      "s-o" #'find-file
+      "s-O" #'other-window
+      "s-i" #'indent-region
+      ;; make search a bit more like Sublime Text:
       "s-f" #'isearch-forward
-      "s-o" #'other-window
-      :map isearch-mode-map "s-f" #'isearch-repeat-forward
-      :map isearch-mode-map "s-g" #'isearch-repeat-forward)
-
+      :map isearch-mode-map
+      "s-f" #'isearch-repeat-forward
+      "s-g" #'isearch-repeat-forward
+      "s-d" #'mc/mark-next-like-this-word)
 
 (map! :after treemacs
       :map treemacs-mode-map
@@ -92,6 +96,7 @@
 
 ;; ess keybinds:
 (map! :after ess
+      :map ess-r-mode-map
       "s-i" #'ess-indent-exp)
 
 
@@ -103,18 +108,23 @@
 (map! :after org
       :map org-mode-map
       ;; meta-left and -right to have non-org behaviour; org behaviour with ctrl-meta:
-      "<C-M-left>" #'org-metaleft
-      "<C-M-right>" #'org-metaright
-      "<M-left>" #'backward-word
-      "<M-right>" #'forward-word
+      "C-M-<left>" #'org-metaleft
+      "C-M-<right>" #'org-metaright
+      "M-<left>" #'backward-word
+      "M-<right>" #'forward-word
       ;; macOS-like word highlighting with shift-meta-arrows:
       "<M-S-left>" #'org-shiftcontrolleft
       "<M-S-right>" #'org-shiftcontrolright
+<<<<<<< Updated upstream
       "<M-S-down>" #'org-shiftdown
       "<M-S-up>" #'org-shiftup
       "s-<return>" #'org-meta-return
       "M-s-<left>" #'org-do-promote
       "M-s-<right>" #'org-do-demote
+=======
+      "M-S-<down>" #'org-shiftdown
+      "M-S-<up>" #'org-shiftup
+>>>>>>> Stashed changes
       ;; macOS-like formatting:
       :desc "Italic" "s-i" (cmd! (org-emphasize ?\/))
       :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
