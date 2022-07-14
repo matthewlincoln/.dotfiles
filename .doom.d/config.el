@@ -115,16 +115,11 @@
       ;; macOS-like word highlighting with shift-meta-arrows:
       "<M-S-left>" #'org-shiftcontrolleft
       "<M-S-right>" #'org-shiftcontrolright
-<<<<<<< Updated upstream
-      "<M-S-down>" #'org-shiftdown
-      "<M-S-up>" #'org-shiftup
+      "M-S-<down>" #'org-shiftdown
+      "M-S-<up>" #'org-shiftup
       "s-<return>" #'org-meta-return
       "M-s-<left>" #'org-do-promote
       "M-s-<right>" #'org-do-demote
-=======
-      "M-S-<down>" #'org-shiftdown
-      "M-S-<up>" #'org-shiftup
->>>>>>> Stashed changes
       ;; macOS-like formatting:
       :desc "Italic" "s-i" (cmd! (org-emphasize ?\/))
       :desc "Bold" "s-b" (cmd! (org-emphasize ?\*))
