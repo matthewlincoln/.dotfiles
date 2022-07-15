@@ -144,6 +144,10 @@
 ;; refresh citar candidates cache when local .bib file changes:
 (citar-filenotify-setup '(LaTeX-mode-hook org-mode-hook)))
 
+;; Configure dictionary:
+(after! ispell
+  (setq ispell-dictionary "en_CA"))
+
 ;; Theme settings:
 
 ;; (load-theme 'kaolin-temple t)
