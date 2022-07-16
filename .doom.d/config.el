@@ -127,7 +127,9 @@
       ;; insert reference:
       :desc "Insert reference" "s-r" #'citar-insert-citation
       ;; export to pdf:
-      :desc "Export to pdf" "s-p" #'org-latex-export-to-pdf)
+      :desc "Export to pdf" "s-p" #'org-latex-export-to-pdf
+      ;; undo abbrev-mode expansion:
+      "s-\\" #'unexpand-abbrev)
 
 ;; customize citar:
 (after! citar
@@ -147,6 +149,12 @@
 ;; Configure dictionary:
 (after! ispell
   (setq ispell-dictionary "en_CA"))
+
+;; use abbrev-mode in text modes:
+(setq abbrev-file-name (expand-file-name "abbrev_defs.el" doom-private-dir)
+      save-abbrevs 'silently)
+(add-hook! (org-mode markdown-mode)
+  (setq-default abbrev-mode t))
 
 ;; Theme settings:
 
