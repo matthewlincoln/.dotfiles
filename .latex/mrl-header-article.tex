@@ -80,6 +80,23 @@
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1ex}
 
+% Articles generally won't have tables of contents, but this should be compact if requested:
+\usepackage[titles]{tocloft}
+% Adjust spacing:
+\setlength{\cftaftertoctitleskip}{1\parskip}
+\setlength{\cftbeforesecskip}{0.5\parskip}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{1.5em}
+\setlength{\cftsubsubsecindent}{1.5em}
+% Adjust fonts:
+\renewcommand{\cfttoctitlefont}{\LARGE\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftsecfont}{\normalsize\sffamily\color{themecolour}}
+\renewcommand{\cftsecpagefont}{\normalsize\sffamily\color{themecolour}}
+\renewcommand{\cftsubsecfont}{\normalsize\sffamily\ltseries}
+\renewcommand{\cftsubsecpagefont}{\normalsize\sffamily\ltseries}
+\renewcommand{\cftsubsubsecfont}{\normalsize\sffamily\ltseries\itshape}
+\renewcommand{\cftsubsubsecpagefont}{\normalsize\sffamily\ltseries\itshape}
+
 % Style section headers:
 \usepackage{titlesec}
 \titleformat{\section}{\large\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
