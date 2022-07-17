@@ -71,3 +71,5 @@
            :repo "matthewlincoln/omnifocus-capture"))
 
 (package! focus)
+
+(package! engrave-faces)

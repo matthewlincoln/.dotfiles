@@ -99,7 +99,6 @@
       :map ess-r-mode-map
       "s-i" #'ess-indent-exp)
 
-
 ;; customize org:
 (after! org
   (setq org-M-RET-may-split-line t))
@@ -157,9 +156,6 @@
   (setq-default abbrev-mode t))
 
 ;; Theme settings:
-
-;; (load-theme 'kaolin-temple t)
-;; (kaolin-treemacs-theme)
 (setq doom-theme 'doom-oceanic-next
       ;; doom-theme 'doom-nord
       doom-font (font-spec :family "Source Code Pro" :size 12)
@@ -499,9 +495,10 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  (setq org-latex-listings t)
-  (add-to-list 'org-latex-packages-alist '("" "listings"))
-  (add-to-list 'org-latex-packages-alist '("" "color")))
+  ;; Use engrave-faces to export code blocks:
+  (setq org-latex-listings 'engraved
+        org-latex-engraved-theme "doom-nord-light"))
+
 
 ;; Highlight lines longer than 100 characters in programming modes:
 (setq whitespace-line-column 100)
