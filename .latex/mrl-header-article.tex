@@ -77,7 +77,11 @@
 \postdate{\end{center}}
 
 % Adjust paragraph spacing:
+\newlength{\defaultparindent}
+\setlength{\defaultparindent}{\parindent}
 \setlength{\parindent}{0em}
+\newlength{\defaultparskip}
+\setlength{\defaultparskip}{\parskip}
 \setlength{\parskip}{1ex}
 
 % Articles generally won't have tables of contents, but this should be compact if requested:
@@ -90,8 +94,8 @@
 \setlength{\cftsubsubsecindent}{1.5em}
 % Adjust fonts:
 \renewcommand{\cfttoctitlefont}{\LARGE\sffamily\bfseries\color{themecolour}}
-\renewcommand{\cftsecfont}{\normalsize\sffamily\color{themecolour}}
-\renewcommand{\cftsecpagefont}{\normalsize\sffamily\color{themecolour}}
+\renewcommand{\cftsecfont}{\normalsize\sffamily}
+\renewcommand{\cftsecpagefont}{\normalsize\sffamily}
 \renewcommand{\cftsubsecfont}{\normalsize\sffamily\ltseries}
 \renewcommand{\cftsubsecpagefont}{\normalsize\sffamily\ltseries}
 \renewcommand{\cftsubsubsecfont}{\normalsize\sffamily\ltseries\itshape}
@@ -113,11 +117,18 @@
 % Reduce spacing in list environments:
 \usepackage{enumitem}
 % Align enumerate and itemize items to left margin, remove parsep:
+% \setlist[enumerate,itemize]{
+%   itemsep=0pt,
+%   leftmargin=*,
+%   topsep=0pt,
+%   parsep=0pt}
+% Indent lists by the default value of \parindent:
 \setlist[enumerate,itemize]{
-  itemsep=0pt,
-  leftmargin=*,
+  left=\defaultparindent,
   topsep=0pt,
-  parsep=0pt}
+  itemsep=0pt,
+  parsep=0pt
+}
 
 \raggedbottom
 
