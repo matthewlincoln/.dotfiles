@@ -488,16 +488,33 @@
   ;; Create option to use LaTeX report class without parts:
   (add-to-list 'org-latex-classes
              '("report-noparts"
-               "\\documentclass{report}"
+               "\\documentclass[11pt,letterpaper]{report}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
                ("\\chapter{%s}" . "\\chapter*{%s}")
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  ;; Use article class without org default packages:
+  (add-to-list 'org-latex-classes
+               '("article-latex"
+                 "\\documentclass[11pt,letterpaper]{article}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   ;; Use engrave-faces to export code blocks:
   (setq org-latex-listings 'engraved
-        org-latex-engraved-theme "doom-nord-light"))
+        org-latex-engraved-theme "doom-nord-light")
+  ;; Set default LaTeX compiler:
+  (setq org-latex-compiler "xelatex"))
 
 
 ;; Highlight lines longer than 100 characters in programming modes:
