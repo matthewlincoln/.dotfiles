@@ -1,0 +1,177 @@
+\usepackage[margin=0.75in]{geometry}
+
+% Configure Source Serif 4 as main font and Source Sans 3 as mono. Adapted from
+% https://tex.stackexchange.com/questions/62603/how-to-choose-a-specific-weight-from-a-font-family-using-fontspec-and-xelatex
+\usepackage{fontspec}
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
+\setmainfont{Source Serif 4}
+  [Ligatures=TeX,
+   UprightFont=*,
+   ItalicFont={* Italic},
+   BoldFont={* Bold},
+   BoldItalicFont={* Bold Italic},
+   FontFace={sb}{n}{* SemiBold},
+   FontFace={sb}{it}{* SemiBold Italic}
+   ]
+\DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+
+\setsansfont{Source Sans 3}
+  [Ligatures=TeX,
+   % Scale=MatchUppercase,
+   Scale=1.008249312557287,
+   UprightFont=*,
+   ItalicFont={* Italic},
+   BoldFont={* Bold},
+   BoldItalicFont={* Bold Italic},
+   FontFace={l}{n}{* Light},
+   FontFace={l}{it}{* Light Italic},
+   FontFace={sb}{n}{* SemiBold},
+   FontFace={sb}{it}{* SemiBold Italic},
+   FontFace={eb}{n}{* Black},
+   FontFace={eb}{it}{* Black Italic}
+  ]
+\DeclareRobustCommand{\ltseries}{\fontseries{l}\selectfont}
+\DeclareTextFontCommand{\textlt}{\ltseries}
+\DeclareRobustCommand{\ebseries}{\fontseries{eb}\selectfont}
+\DeclareTextFontCommand{\texteb}{\ebseries}
+
+\setmonofont{Source Code Pro Medium}[Scale=MatchUppercase]
+
+% Define theme colour:
+\usepackage[dvipsnames]{xcolor}
+\definecolor{themecolour}{HTML}{00205B} % Pantone 281C
+
+% Change the title font:
+\usepackage{titling}
+\pretitle{\begin{center}\large\sffamily\bfseries\color{themecolour}}
+\posttitle{\par\end{center}\vspace{-2ex}}
+\preauthor{\begin{center}}
+\postauthor{\end{center}\vspace{-5ex}}
+\predate{\begin{center}}
+\postdate{\end{center}}
+
+% Adjust paragraph spacing:
+\newlength{\defaultparindent}
+\setlength{\defaultparindent}{\parindent}
+\setlength{\parindent}{0em}
+\newlength{\defaultparskip}
+\setlength{\defaultparskip}{\parskip}
+\setlength{\parskip}{1ex}
+
+% Articles generally won't have tables of contents, but this should be compact if requested:
+\usepackage[titles]{tocloft}
+% Adjust spacing:
+\setlength{\cftaftertoctitleskip}{1\parskip}
+\setlength{\cftbeforesecskip}{0.5\parskip}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{1.5em}
+\setlength{\cftsubsubsecindent}{1.5em}
+% Adjust fonts:
+\renewcommand{\cfttoctitlefont}{\LARGE\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftsecfont}{\normalsize\sffamily}
+\renewcommand{\cftsecpagefont}{\normalsize\sffamily}
+\renewcommand{\cftsubsecfont}{\normalsize\sffamily\ltseries}
+\renewcommand{\cftsubsecpagefont}{\normalsize\sffamily\ltseries}
+\renewcommand{\cftsubsubsecfont}{\normalsize\sffamily\ltseries\itshape}
+\renewcommand{\cftsubsubsecpagefont}{\normalsize\sffamily\ltseries\itshape}
+
+% Style section headers:
+\usepackage{titlesec}
+\titleformat{\section}{\large\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\section}{0pt}{\parskip}{2pt}
+\titleformat{\subsection}{\normalsize\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{\parskip}{-\parskip}
+\titleformat{\subsubsection}{\normalsize\sffamily\bfseries\itshape\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\subsubsection}{0pt}{\parskip}{-\parskip}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries\color{themecolour}}{\thetitle}{}{}
+\titlespacing{\paragraph}{0pt}{0pt}{1ex}
+\titleformat{\subparagraph}[runin]{\normalsize\bfseries\itshape\color{themecolour}}{\thetitle}{}{}
+\titlespacing{\subparagraph}{0pt}{0pt}{1ex}
+
+% Reduce spacing in list environments:
+\usepackage{enumitem}
+% Align enumerate and itemize items to left margin, remove parsep:
+% \setlist[enumerate,itemize]{
+%   itemsep=0pt,
+%   leftmargin=*,
+%   topsep=0pt,
+%   parsep=0pt}
+% Indent lists by the default value of \parindent:
+\setlist[enumerate,itemize]{
+  left=\defaultparindent,
+  topsep=0pt,
+  itemsep=0pt,
+  parsep=0pt
+}
+
+% Indent description environments:
+\setlist[description]{
+  font=\sffamily\bfseries\color{themecolour},
+  leftmargin=3in,
+  itemindent=0in,
+  labelwidth=*,
+  topsep=0pt,
+  parsep=3\parsep
+}
+
+\raggedbottom
+
+% Enable hyperlinks for paper URLs:
+\usepackage{hyperref}
+\hypersetup{
+  hyperfootnotes=false,
+  colorlinks=true,
+  citecolor=themecolour,
+  urlcolor=themecolour,
+  linkcolor=.
+}
+
+% Enable author affiliations:
+\usepackage{authblk}
+
+% Allow tables to be scaled:
+\usepackage{tabularx}
+
+% Change font for figure labels:
+\usepackage[font=small,
+            labelfont={color=themecolour,bf,sf},
+            textfont=sf,
+            justification=justified,singlelinecheck=false]{caption}
+\captionsetup[table]{skip=4pt}
+
+% Change the table font:
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\sffamily}
+\AtBeginEnvironment{tabular}{\sffamily}
+\AtBeginEnvironment{tabularx}{\sffamily}
+
+% Redefine page numbers:
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% The article class uses the plain style for the first page, so we redefine:
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[C]{%
+    \hspace*{-0.75in}
+    \includegraphics[width=8.5in]{unity_letterhead_header.pdf}
+  }
+  \fancyfoot[C]{%
+    \includegraphics[scale=0.6]{unity_letterhead_footer.pdf}
+  }
+  \fancyfoot[R]{\thepage\ of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+% Use a modified fancy style for all other pages:
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage{booktabs}
