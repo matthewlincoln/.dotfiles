@@ -113,7 +113,7 @@
   itemindent=0in,
   labelwidth=*,
   topsep=0pt,
-  parsep=3\parsep
+  parsep=2\parsep
 }
 
 \raggedbottom
@@ -152,6 +152,9 @@
 \usepackage{graphicx}
 \usepackage{lastpage}
 
+% Define a short title for header elements
+\newcommand{\shorttitle}{}
+
 % The article class uses the plain style for the first page, so we redefine:
 \fancypagestyle{plain}{%
   \fancyhf{}
@@ -171,7 +174,10 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[R]{\thepage\ of \pageref{LastPage}}
+\fancyhead[R]{\shorttitle}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
 \usepackage{booktabs}
+
+\usepackage{setspace}
