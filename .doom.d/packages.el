@@ -72,4 +72,6 @@
 
 (package! focus)
 
+(package! org-modern)
+
 (package! engrave-faces)

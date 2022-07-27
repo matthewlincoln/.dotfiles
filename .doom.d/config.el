@@ -100,6 +100,8 @@
       "s-i" #'ess-indent-exp)
 
 ;; customize org:
+(global-org-modern-mode)
+
 (after! org
   (setq org-M-RET-may-split-line t))
 
