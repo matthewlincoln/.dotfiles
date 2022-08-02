@@ -100,10 +100,13 @@
       "s-i" #'ess-indent-exp)
 
 ;; customize org:
-(global-org-modern-mode)
-
 (after! org
   (setq org-M-RET-may-split-line t))
+
+;; customize org-modern mode:
+(after! org-modern
+  (setq org-modern-star '("⦿" "●" "○" "▶︎" "▷"))
+  (global-org-modern-mode))
 
 ;; org-mode keybinds:
 (map! :after org
@@ -162,7 +165,7 @@
       ;; doom-theme 'doom-nord
       doom-font (font-spec :family "Source Code Pro" :size 12)
       ;; doom-font (font-spec :family "Anonymous Pro" :size 12)
-      doom-variable-pitch-font (font-spec :family "Helvetica Neue"))
+      doom-variable-pitch-font (font-spec :family "Source Sans 3"))
 
 ;; Use Monaco font for tabs:
 (after! centaur-tabs
