@@ -83,7 +83,9 @@
       "s-p" #'treemacs-switch-workspace
       [mouse-1] #'treemacs-single-click-expand-action)
 
-(map! :map mc/keymap "<escape>" #'mc/keyboard-quit)
+(map! :map mc/keymap
+      "<escape>" #'mc/keyboard-quit
+      [mouse-1] #'mc/keyboard-quit)
 
 ;; Make shift-click expand the selection zone:
 (define-key global-map (kbd "<S-down-mouse-1>") #'mouse-save-then-kill)
