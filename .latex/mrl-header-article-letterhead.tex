@@ -41,7 +41,7 @@
 
 % Define theme colour:
 \usepackage[dvipsnames]{xcolor}
-\definecolor{themecolour}{HTML}{00205B} % Pantone 281C
+\definecolor{themecolour}{HTML}{563E82} % Pantone 7679C
 
 % Change the title font:
 \usepackage{titling}
@@ -160,12 +160,14 @@
   \fancyhf{}
   \fancyhead[C]{%
     \hspace*{-0.75in}
-    \includegraphics[width=8.5in]{unity_letterhead_header.pdf}
+    \includegraphics[width=8.5in]{~/.latex/unity_letterhead_header.pdf}
   }
-  \fancyfoot[C]{%
-    \includegraphics[scale=0.6]{unity_letterhead_footer.pdf}
-  }
-  \fancyfoot[R]{\thepage\ of \pageref{LastPage}}
+  % \fancyfoot[C]{%
+  %   \includegraphics[scale=0.6]{unity_letterhead_footer.pdf}
+  % }
+  \fancyfoot[L]{\small\shorttitle}
+  \fancyfoot[C]{\small{}Page \thepage\ of \pageref{LastPage}}
+  \fancyfoot[R]{\small{}Version Date: \versiondate}
   \renewcommand{\headrulewidth}{0pt}%
   \renewcommand{\footrulewidth}{0pt}%
 }
@@ -173,8 +175,9 @@
 % Use a modified fancy style for all other pages:
 \pagestyle{fancy}
 \fancyhf{}
-\fancyfoot[R]{\thepage\ of \pageref{LastPage}}
-\fancyhead[R]{\shorttitle}
+\fancyfoot[L]{\small\shorttitle}
+\fancyfoot[C]{\small{}Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\small{}Version Date: \versiondate}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
