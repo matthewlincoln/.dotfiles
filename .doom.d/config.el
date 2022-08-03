@@ -515,6 +515,18 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  ;; Use letter class without org default packages:
+  (add-to-list 'org-latex-classes
+               '("letter-latex"
+                 "\\documentclass[11pt,letterpaper]{letter}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   ;; Use engrave-faces to export code blocks:
   (setq org-latex-listings 'engraved
         org-latex-engraved-theme "doom-nord-light")
