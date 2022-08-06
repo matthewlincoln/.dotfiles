@@ -49,22 +49,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;; (package! all-the-icons)
-;; (package! treemacs-all-the-icons)
-;; (package! treemacs-icons-dired)
-
-;; (package! kaolin-themes)
-
-;; (package! pdf-tools)
-
 (package! isend-mode)
 (package! ssh)
-
-;; (package! omnifocus-capture
-;;   :recipe (:host nil :repo "https://gist.github.com/cacbaf7b34b042bb308b.git"))
-
-;; (package! omnifocus-capture
-;;   :recipe (:local-repo "/Users/lincoln/omnifocus-capture"))
 
 (package! omnifocus-capture
   :recipe (:host github
@@ -72,6 +58,11 @@
 
 (package! focus)
 
-(package! org-modern)
+;; (package! org-modern)
 
 (package! engrave-faces)
+
+(package! org-ol-tree
+  :recipe (:host github :repo "Townk/org-ol-tree"))
+
+(package! org-appear)

@@ -57,7 +57,7 @@
 ;; General theme settings:
 (setq doom-theme 'doom-oceanic-next
       doom-font (font-spec :family "Source Code Pro" :size 12)
-      doom-variable-pitch-font (font-spec :family "Source Sans 3"))
+      doom-variable-pitch-font (font-spec :family "Source Sans 3" :size 12))
 
 ;; Blink the cursor:
 (blink-cursor-mode)
@@ -178,7 +178,29 @@
 
 ;; customize org:
 (after! org
-  (setq org-M-RET-may-split-line t))
+  (setq org-M-RET-may-split-line t
+        org-pretty-entities nil
+        org-ellipsis " ▼"))
+
+;; customize org-modern mode:
+;; (after! org-modern
+;;   (setq org-modern-star '("✶" "●" "○" "▶︎" "▷")))
+;; org-appear does not yet support org-modern, so we return to org + pretty for now
+
+;; writeroom-mode is loaded by doom's ui/zen module
+(after! writeroom-mode
+  (setq writeroom-mode-line t))
+
+;; Wrap modes to enable in org-mode in a function:
+;; Adapted from https://github.com/elken/doom
+(defun mrl/org-setup-hook ()
+  "Modes to enable on org-mode start"
+  ;; (org-modern-mode)
+  (org-appear-mode) ; does not yet support org-modern
+  (doom-disable-line-numbers-h)
+  )
+
+(add-hook! org-mode #'mrl/org-setup-hook)
 
 ;; org-mode keybinds:
 (map! :after org
@@ -205,12 +227,8 @@
       ;; export to pdf:
       :desc "Export to pdf" "s-p" #'org-latex-export-to-pdf
       ;; undo abbrev-mode expansion:
-      "s-\\" #'unexpand-abbrev)
-
-;; customize org-modern mode:
-(after! org-modern
-  (setq org-modern-star '("⦿" "●" "○" "▶︎" "▷"))
-  (global-org-modern-mode))
+      "s-\\" #'unexpand-abbrev
+      "s-w" #'writeroom-mode)
 
 
 ;; customize citar:
