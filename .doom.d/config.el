@@ -54,61 +54,131 @@
 ;; they are implemented.
 
 
-;; Keybinds:
+;; General theme settings:
+(setq doom-theme 'doom-oceanic-next
+      doom-font (font-spec :family "Source Code Pro" :size 12)
+      doom-variable-pitch-font (font-spec :family "Source Sans 3"))
 
-;; Evaluate lisp expressions with Command-E:
-(map! "s-e" #'eval-last-sexp)
+;; Blink the cursor:
+(blink-cursor-mode)
 
-;; Some macOS- and Sublime-like global keybinds:
-(map! "s-<up>" #'beginning-of-buffer
-      "s-<down>" #'end-of-buffer
-      "s-x" #'kill-region
-      "s-c" #'kill-ring-save
-      "s-v" #'yank
-      "s-q" #'save-buffers-kill-emacs
-      "s-t" #'treemacs
-      "s-k" #'kill-whole-line
-      "s-o" #'find-file
-      "s-O" #'other-window
-      "s-i" #'indent-region
-      ;; make search a bit more like Sublime Text:
-      "s-f" #'isearch-forward
-      :map isearch-mode-map
-      "s-f" #'isearch-repeat-forward
-      "s-g" #'isearch-repeat-forward
-      "s-d" #'mc/mark-next-like-this-word)
+(setq-default cursor-type 'bar
+              tab-width 2)
+
+;; Disable exit confirmation:
+(setq confirm-kill-emacs nil)
+
+;; Prevent tramp from compressing files: this was causing gzip errors
+(setq tramp-copy-size-limit 1000000
+      tramp-inline-compress-start-size 1000000)
+
+;; Maximize emacs window on laptop:
+(if (or (string= (system-name) "gandalf")
+        (string= (system-name) "gandalf.local"))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (progn (add-to-list 'default-frame-alist '(width . 250))
+         (add-to-list 'default-frame-alist '(height . 70))
+         (add-to-list 'default-frame-alist '(top . 0.5))
+         (add-to-list 'default-frame-alist '(left . 0.5))))
+
+;; use abbrev-mode in text modes:
+(setq abbrev-file-name (expand-file-name "abbrev_defs.el" doom-private-dir)
+      save-abbrevs 'silently)
+(add-hook! (org-mode markdown-mode)
+  (setq-default abbrev-mode t))
+
+;; Highlight lines longer than 100 characters in programming modes:
+;; from https://emacsredux.com/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/
+(setq whitespace-line-column 100)
+(setq whitespace-style '(face tabs tab-mark lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
+;; display indent guides in programming modes:
+(after! highlight-indent-guides
+  (setq highlight-indent-guides-responsive t)
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+
+
+;; Configure vterm
+(after! vterm
+  (setq vterm-shell "bash"))
+
+
+;; Configure vertico
+(after! vertico
+  (vertico-mouse-mode))
+
+
+;; centaur-tabs
+(after! centaur-tabs
+  ;; Use Monaco font for tabs:
+  (centaur-tabs-change-fonts "Monaco" 120)
+  (setq centaur-tabs-show-navigation-buttons t
+        ;; centaur-tabs-down-tab-text " ▼ "
+        centaur-tabs-down-tab-text " ▾ "
+        ;; centaur-tabs-backward-tab-text " ◀︎ "
+        centaur-tabs-backward-tab-text " < "
+        ;; centaur-tabs-forward-tab-text " ▶︎ "
+        centaur-tabs-forward-tab-text " > "
+        ;; centaur-tabs-show-new-tab-button t
+        ;; centaur-tabs-new-tab-text " + "
+        x-underline-at-descent-line t
+        centaur-tabs-style "chamfer"
+        centaur-tabs-height 32
+        centaur-tabs-set-bar 'under)
+  (centaur-tabs-group-by-projectile-project))
+
+;; Cycle through tabs with ctrl-tab:
+(map! :after centaur-tabs
+      "<C-tab>" #'centaur-tabs-forward
+      "<C-S-tab>" #'centaur-tabs-backward)
+
+
+;; treemacs
+(after! treemacs
+  (setq +treemacs-use-git-mode 'simple
+        ;; Do not expand top treemacs project:
+        treemacs-expand-after-init nil))
+
+(after! doom-themes
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config))
 
 (map! :after treemacs
       :map treemacs-mode-map
       "s-p" #'treemacs-switch-workspace
       [mouse-1] #'treemacs-single-click-expand-action)
 
-(map! :map mc/keymap
-      "<escape>" #'mc/keyboard-quit
-      [mouse-1] #'mc/keyboard-quit)
 
-;; Make shift-click expand the selection zone:
-(define-key global-map (kbd "<S-down-mouse-1>") #'mouse-save-then-kill)
+;; configure modeline
 
+;; Add clock and battery status to modeline:
+(setq display-time-24hr-format t
+      display-time-day-and-date t
+      display-time-format "%a %m/%d %H:%M"
+      display-time-default-load-average nil)
+(display-time)
 
-;; markdown-mode keybinds:
-(map! :map markdown-mode-map
-      "s-i" #'markdown-insert-italic
-      "s-b" #'markdown-insert-bold)
+;; Only display battery mode when on laptop:
+;; Display battery status when this is available
+;; This code is taken from https://abdelhakbougouffa.pro/posts/config/#battery
+(after! doom-modeline
+  (let ((battery-str (battery)))
+     (unless (or (equal "Battery status not available" battery-str)
+                 (string-match-p (regexp-quote "unknown") battery-str)
+                 (string-match-p (regexp-quote "N/A") battery-str))
+      (display-battery-mode 1))))
 
-;; ess keybinds:
-(map! :after ess
-      :map ess-r-mode-map
-      "s-i" #'ess-indent-exp)
+;; add word count to modeline in org-mode
+(after! doom-modeline
+  ;; (add-to-list 'doom-modeline-continuous-word-count-modes 'org-mode)
+  (setq doom-modeline-enable-word-count t)
+  (setq doom-modeline-modal-icon nil))
+
 
 ;; customize org:
 (after! org
   (setq org-M-RET-may-split-line t))
-
-;; customize org-modern mode:
-(after! org-modern
-  (setq org-modern-star '("⦿" "●" "○" "▶︎" "▷"))
-  (global-org-modern-mode))
 
 ;; org-mode keybinds:
 (map! :after org
@@ -137,6 +207,12 @@
       ;; undo abbrev-mode expansion:
       "s-\\" #'unexpand-abbrev)
 
+;; customize org-modern mode:
+(after! org-modern
+  (setq org-modern-star '("⦿" "●" "○" "▶︎" "▷"))
+  (global-org-modern-mode))
+
+
 ;; customize citar:
 (after! citar
   (setq citar-symbols
@@ -152,124 +228,111 @@
 ;; refresh citar candidates cache when local .bib file changes:
 (citar-filenotify-setup '(LaTeX-mode-hook org-mode-hook)))
 
-;; Configure dictionary:
+;; ispell
 (after! ispell
   (setq ispell-dictionary "en_CA"))
 
-;; use abbrev-mode in text modes:
-(setq abbrev-file-name (expand-file-name "abbrev_defs.el" doom-private-dir)
-      save-abbrevs 'silently)
-(add-hook! (org-mode markdown-mode)
-  (setq-default abbrev-mode t))
 
-;; Theme settings:
-(setq doom-theme 'doom-oceanic-next
-      ;; doom-theme 'doom-nord
-      doom-font (font-spec :family "Source Code Pro" :size 12)
-      ;; doom-font (font-spec :family "Anonymous Pro" :size 12)
-      doom-variable-pitch-font (font-spec :family "Source Sans 3"))
-
-;; Use Monaco font for tabs:
-(after! centaur-tabs
-  (centaur-tabs-change-fonts "Monaco" 120)
-  ;; (centaur-tabs-change-fonts "Avenir Next Regular" 130)
-  (setq centaur-tabs-show-navigation-buttons t
-        ;; centaur-tabs-down-tab-text " ▼ "
-        centaur-tabs-down-tab-text " ▾ "
-        ;; centaur-tabs-backward-tab-text " ◀︎ "
-        centaur-tabs-backward-tab-text " < "
-        ;; centaur-tabs-forward-tab-text " ▶︎ "
-        centaur-tabs-forward-tab-text " > "
-        ;; centaur-tabs-show-new-tab-button t
-        ;; centaur-tabs-new-tab-text " + "
-        x-underline-at-descent-line t
-        centaur-tabs-style "chamfer"
-        centaur-tabs-height 32
-        centaur-tabs-set-bar 'under)
-  (centaur-tabs-group-by-projectile-project))
-
-;; Cycle through tabs with ctrl-tab:
-(map! :after centaur-tabs
-      "<C-tab>" #'centaur-tabs-forward
-      "<C-S-tab>" #'centaur-tabs-backward)
-
-(setq +treemacs-use-git-mode 'simple)
-
-;; Do not expand top treemacs project:
-(setq treemacs-expand-after-init nil)
-
-;; Add clock and battery status to modeline:
-(setq display-time-24hr-format t
-      display-time-day-and-date t
-      display-time-format "%a %m/%d %H:%M"
-      display-time-default-load-average nil)
-(display-time)
-
-;; Only display battery mode when on laptop:
-;; (when (string= (system-name) "gandalf.local")
-;;   (display-battery-mode))
-;; Display battery status when this is available
-;; This code is taken from https://abdelhakbougouffa.pro/posts/config/#battery
-(after! doom-modeline
-  (let ((battery-str (battery)))
-     (unless (or (equal "Battery status not available" battery-str)
-                 (string-match-p (regexp-quote "unknown") battery-str)
-                 (string-match-p (regexp-quote "N/A") battery-str))
-      (display-battery-mode 1))))
-
-;; add word count to modeline in org-mode
-(after! doom-modeline
-  ;; (add-to-list 'doom-modeline-continuous-word-count-modes 'org-mode)
-  (setq doom-modeline-enable-word-count t)
-  (setq doom-modeline-modal-icon nil))
-
-(after! doom-themes
-  (setq doom-themes-treemacs-theme "doom-colors")
-  ;; (setq doom-themes-treemacs-theme "doom-atom")
-  (doom-themes-treemacs-config))
+;; Configure latex (from https://tecosaur.github.io/emacs-config/config.html):
+(setq TeX-save-query nil
+      TeX-show-compilation t
+      TeX-command-extra-options "-shell-escape")
+(after! latex
+  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t)))
 
 ;; Prevent underscores from being interpreted as subscripts in tex mode
 (setq tex-fontify-script nil)
 
-;; Blink the cursor:
-(blink-cursor-mode)
+;; Configure org LaTeX export:
+(after! ox-latex
+  ;; Create option to use LaTeX report class without parts:
+  (add-to-list 'org-latex-classes
+             '("report-noparts"
+               "\\documentclass[11pt,letterpaper]{report}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  ;; Use article class without org default packages:
+  (add-to-list 'org-latex-classes
+               '("article-latex"
+                 "\\documentclass[11pt,letterpaper]{article}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  ;; Use letter class without org default packages:
+  (add-to-list 'org-latex-classes
+               '("letter-latex"
+                 "\\documentclass[11pt,letterpaper]{letter}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  ;; Use engrave-faces to export code blocks:
+  (setq org-latex-listings 'engraved
+        org-latex-engraved-theme "doom-nord-light")
+  ;; Set default LaTeX compiler:
+  (setq org-latex-compiler "xelatex"))
 
-(setq-default cursor-type 'bar
-              tab-width 2)
 
-;; Disable exit confirmation:
-(setq confirm-kill-emacs nil)
-
-;; Prevent tramp from compressing files: this was causing gzip errors
-(setq tramp-copy-size-limit 1000000
-      tramp-inline-compress-start-size 1000000)
-
-;; Maximize emacs window on laptop:
-(if (or (string= (system-name) "gandalf")
-        (string= (system-name) "gandalf.local"))
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
-  (progn (add-to-list 'default-frame-alist '(width . 250))
-         (add-to-list 'default-frame-alist '(height . 70))
-         (add-to-list 'default-frame-alist '(top . 0.5))
-         (add-to-list 'default-frame-alist '(left . 0.5))))
-
-(setq ispell-dictionary "en")
+;; ess
 
 ;; Do not indent comments in R:
-(setq ess-indent-with-fancy-comments nil)
+(setq ess-indent-with-fancy-comments nil) ; must be set before ess loads
 
-;; Highlight lines that exceed 100 characters:
-;; (from https://emacsredux.com/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/)
-;; (after! whitespace
-;;   (setq whitespace-line-column 100 ;; limit line length
-;;         whitespace-style '(face lines-tail)))
+;; ess keybinds:
+(map! :after ess
+      :map ess-r-mode-map
+      "s-i" #'ess-indent-exp)
 
-;; (add-hook 'prog-mode-hook 'whitespace-mode)
-;; (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
-(after! highlight-indent-guides
-  (setq highlight-indent-guides-responsive t)
-  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+;; General keybinds:
+
+;; Evaluate lisp expressions with Command-E:
+(map! "s-e" #'eval-last-sexp)
+
+;; Some macOS- and Sublime-like global keybinds:
+(map! "s-<up>" #'beginning-of-buffer
+      "s-<down>" #'end-of-buffer
+      "s-x" #'kill-region
+      "s-c" #'kill-ring-save
+      "s-v" #'yank
+      "s-q" #'save-buffers-kill-emacs
+      "s-t" #'treemacs
+      "s-k" #'kill-whole-line
+      "s-o" #'find-file
+      "s-O" #'other-window
+      "s-i" #'indent-region
+      ;; make search a bit more like Sublime Text:
+      "s-f" #'isearch-forward
+      :map isearch-mode-map
+      "s-f" #'isearch-repeat-forward
+      "s-g" #'isearch-repeat-forward
+      "s-d" #'mc/mark-next-like-this-word)
+
+(map! :map mc/keymap
+      "<escape>" #'mc/keyboard-quit
+      [mouse-1] #'mc/keyboard-quit)
+
+;; markdown-mode keybinds:
+(map! :map markdown-mode-map
+      "s-i" #'markdown-insert-italic
+      "s-b" #'markdown-insert-bold)
+
 
 ;; Use omnifocus-capture to send region to OmniFocus:
 (autoload 'send-region-to-omnifocus "omnifocus-capture" "Send region to OmniFocus" t)
@@ -482,69 +545,3 @@
 
 ;; Bind email:
 (map! "s-m" #'=mu4e)
-
-;; Configure latex (from https://tecosaur.github.io/emacs-config/config.html):
-(setq TeX-save-query nil
-      TeX-show-compilation t
-      TeX-command-extra-options "-shell-escape")
-(after! latex
-  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t)))
-
-;; Configure org LaTeX export:
-(after! ox-latex
-  ;; Create option to use LaTeX report class without parts:
-  (add-to-list 'org-latex-classes
-             '("report-noparts"
-               "\\documentclass[11pt,letterpaper]{report}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-               ("\\chapter{%s}" . "\\chapter*{%s}")
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  ;; Use article class without org default packages:
-  (add-to-list 'org-latex-classes
-               '("article-latex"
-                 "\\documentclass[11pt,letterpaper]{article}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  ;; Use letter class without org default packages:
-  (add-to-list 'org-latex-classes
-               '("letter-latex"
-                 "\\documentclass[11pt,letterpaper]{letter}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  ;; Use engrave-faces to export code blocks:
-  (setq org-latex-listings 'engraved
-        org-latex-engraved-theme "doom-nord-light")
-  ;; Set default LaTeX compiler:
-  (setq org-latex-compiler "xelatex"))
-
-
-;; Highlight lines longer than 100 characters in programming modes:
-(setq whitespace-line-column 100)
-(setq whitespace-style '(face tabs tab-mark lines-tail))
-(add-hook 'prog-mode-hook 'whitespace-mode)
-
-;; Configure vterm
-(after! vterm
-  (setq vterm-shell "bash"))
-
-;; Configure vertico
-(after! vertico
-  (vertico-mouse-mode))
