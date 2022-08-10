@@ -179,7 +179,10 @@
 ;; customize org:
 (after! org
   (setq org-M-RET-may-split-line t
-        org-pretty-entities nil
+        org-pretty-entities t
+        org-hide-emphasis-markers t
+        org-appear-autolinks t
+        org-appear-autoentities t
         org-ellipsis " ▼"))
 
 ;; customize org-modern mode:
