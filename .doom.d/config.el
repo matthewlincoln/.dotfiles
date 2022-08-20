@@ -180,6 +180,7 @@
 (after! org
   (setq org-M-RET-may-split-line t
         org-pretty-entities t
+        org-pretty-entities-include-sub-superscripts nil
         org-hide-emphasis-markers t
         org-appear-autolinks t
         org-appear-autoentities t
@@ -192,7 +193,8 @@
 
 ;; writeroom-mode is loaded by doom's ui/zen module
 (after! writeroom-mode
-  (setq writeroom-mode-line t))
+  (setq writeroom-width 60
+        writeroom-mode-line t))
 
 ;; Wrap modes to enable in org-mode in a function:
 ;; Adapted from https://github.com/elken/doom
