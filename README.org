@@ -80,3 +80,8 @@ To infer title bar colour from the present theme, we need to update Emacs defaul
 #+begin_src zsh
 defaults write org.gnu.Emacs TransparentTitleBar DARK
 #+end_src
+
+* iTerm2
+We use the [[https://www.nordtheme.com][Nord]] colour palette for iTerm2. This is available as an =itermcolors= file from [[https://github.com/arcticicestudio/nord-iterm2/blob/develop/src/xml/Nord.itermcolors][here]].
+
+Previously, we used the [[https://github.com/voronianski/oceanic-next-color-scheme][Oceanic Next]] colour palette, available [[https://github.com/mhartington/oceanic-next-iterm/blob/master/Oceanic-Next.itermcolors][here]].
