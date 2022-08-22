@@ -1,7 +1,6 @@
 {
     "show_indent_guides": true,
-    "initial_working_directory": "~",
-    "editor_theme": "Oceanic Next",
+    "editor_theme": "Nord",
     "default_project_location": "~",
     "wrap_tab_navigation": false,
     "save_workspace": "never",
@@ -37,5 +36,6 @@
     "margin_column": 100,
     "posix_terminal_shell": "bash",
     "knit_working_dir": "project",
-    "source_with_echo": true
+    "source_with_echo": true,
+    "pdf_previewer": "none"
 }
