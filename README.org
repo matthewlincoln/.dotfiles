@@ -67,7 +67,8 @@ The following configuration files are included:
 | .config/rstudio/Oceanic Next.rstheme | RStudio theme file                                        |
 | .config/rstudio/Nord.rstheme         | RStudio theme file                                        |
 
-* Emacs
+* Program-Specific Configuration Details
+** Emacs
 This config assumes the emacs-mac port from [[https://github.com/railwaycat/homebrew-emacsmacport][railwaycat]]:
 
 #+begin_src zsh
@@ -82,12 +83,12 @@ To infer title bar colour from the present theme, we need to update Emacs defaul
 defaults write org.gnu.Emacs TransparentTitleBar DARK
 #+end_src
 
-* iTerm2
+** iTerm2
 We use the [[https://www.nordtheme.com][Nord]] colour palette for iTerm2. This is available as an =itermcolors= file from [[https://github.com/arcticicestudio/nord-iterm2/blob/develop/src/xml/Nord.itermcolors][here]].
 
 Previously, we used the [[https://github.com/voronianski/oceanic-next-color-scheme][Oceanic Next]] colour palette, available [[https://github.com/mhartington/oceanic-next-iterm/blob/master/Oceanic-Next.itermcolors][here]].
 
-* RStudio
+** RStudio
 We use the [[https://www.nordtheme.com][Nord]] colour palette for RStudio. This is available as an =rstheme= file from [[https://github.com/edavidaja/nord-rstudio/blob/master/Nord.rstheme][here]].
 
-Previously, we used the Oceanic Next colour palette. This is available as a =tmTheme= file [[https://github.com/voronianski/oceanic-next-color-scheme/blob/master/Oceanic%20Next.tmTheme][here]]. RStudio converts this on input to an =rstheme= file.
+Previously, we used the [[https://github.com/voronianski/oceanic-next-color-scheme][Oceanic Next]] colour palette. This is available as a =tmTheme= file [[https://github.com/voronianski/oceanic-next-color-scheme/blob/master/Oceanic%20Next.tmTheme][here]]. RStudio converts this on input to an =rstheme= file.
