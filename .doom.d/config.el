@@ -55,9 +55,9 @@
 
 
 ;; General theme settings:
-(setq doom-theme 'doom-oceanic-next
+(setq doom-theme 'doom-nord
       doom-font (font-spec :family "Source Code Pro" :size 12)
-      doom-variable-pitch-font (font-spec :family "Source Sans 3" :size 12))
+      doom-variable-pitch-font (font-spec :family "Open Sans" :size 12))
 
 ;; Blink the cursor:
 (blink-cursor-mode)
