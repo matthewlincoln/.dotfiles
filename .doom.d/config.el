@@ -340,6 +340,9 @@
       "s-o" #'find-file
       "s-O" #'other-window
       "s-i" #'indent-region
+      ;; macOS-like mouse actions:
+      "S-<down-mouse-1>" #'mouse-save-then-kill
+      "<mouse-3>" #'mouse-appearance-menu
       ;; make search a bit more like Sublime Text:
       "s-f" #'isearch-forward
       :map isearch-mode-map
