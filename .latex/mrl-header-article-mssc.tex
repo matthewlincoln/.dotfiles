@@ -122,15 +122,24 @@
 % allow for graphics
 \usepackage{graphicx}
 
-% Redefine page numbers:
+% Use MS Society header on the first page:
 \usepackage{fancyhdr}
+\usepackage[absolute]{textpos}
 
 \fancypagestyle{plain}{
   \fancyhf{}
-  \lhead{%
-    \vspace*{0.25in}%
-    \includegraphics*[width=2.23cm]{~/.latex/mssociety_header.png}}
-  \rhead{\bfseries\itshape\shorttitle}
+  \renewcommand{\headheight}{0.5in}
+  \fancyhead[L]{%
+    \begin{textblock*}{0.878in}(0.5in,0.5054in)
+      \includegraphics*[width=2.23cm]{~/.latex/mssociety_header.png}
+    \end{textblock*}}
+
+  \fancyhead[R]{%
+    \begin{textblock*}{2.5in}(5.5in,0.6309in)
+      \begin{flushright}
+        \bfseries\itshape\shorttitle
+      \end{flushright}
+    \end{textblock*}}
 
   \fancyfoot[R]{\thepage}
   \renewcommand{\headrulewidth}{0pt}
