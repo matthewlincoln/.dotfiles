@@ -1,10 +1,11 @@
 \usepackage[margin=0.5in]{geometry}
+\usepackage{calc}
 
 % Configure Source Serif 4 as main font and Source Sans 3 as mono. Adapted from
 % https://tex.stackexchange.com/questions/62603/how-to-choose-a-specific-weight-from-a-font-family-using-fontspec-and-xelatex
 \usepackage{fontspec}
 \defaultfontfeatures{Scale=MatchLowercase}
-\defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
+\defaultfontfeatures[\rmfamily]{Scale=1.0040657054} % use postscript pt
 \setmainfont{Times New Roman}
   [Ligatures=TeX,
    UprightFont=*,
@@ -31,7 +32,7 @@
 % Change the title font:
 \usepackage{titling}
 \setlength{\droptitle}{-3.5em}
-\pretitle{\begin{center}\rmfamily\bfseries\color{themecolour}}
+\pretitle{\vspace{0.25in}\begin{center}\rmfamily\bfseries\color{themecolour}}
 \posttitle{\par\end{center}\vspace{-2em}}
 \preauthor{}
 \author{}
@@ -114,7 +115,7 @@
 \usepackage{tabularx}
 
 % Change font for figure labels:
-\usepackage[font=small,
+\usepackage[font=normalsize,
             labelfont={color=themecolour,bf},
             justification=justified,singlelinecheck=false]{caption}
 \captionsetup[table]{skip=4pt}
@@ -128,16 +129,16 @@
 
 \fancypagestyle{plain}{
   \fancyhf{}
-  \renewcommand{\headheight}{0.5in}
+  % \renewcommand{\headheight}{0.5in}
   \fancyhead[L]{%
-    \begin{textblock*}{0.878in}(0.5in,0.5054in)
+    \begin{textblock*}{0.878in}[0,1](0.5in,1in-0.0162pt) % adjust to match spacing in template
       \includegraphics*[width=2.23cm]{~/.latex/mssociety_header.png}
     \end{textblock*}}
 
   \fancyhead[R]{%
-    \begin{textblock*}{2.5in}(5.5in,0.6309in)
-      \begin{flushright}
-        \bfseries\itshape\shorttitle
+    \begin{textblock*}{2.5in}[1,1](8in,0.5in+0.5967in)
+      \begin{flushright}%
+        \bfseries\itshape\shorttitle%
       \end{flushright}
     \end{textblock*}}
 
@@ -156,3 +157,5 @@
 \usepackage{booktabs}
 
 \usepackage{setspace}
+
+\frenchspacing
