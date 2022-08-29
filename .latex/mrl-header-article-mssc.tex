@@ -5,9 +5,9 @@
 % https://tex.stackexchange.com/questions/62603/how-to-choose-a-specific-weight-from-a-font-family-using-fontspec-and-xelatex
 \usepackage{fontspec}
 \defaultfontfeatures{Scale=MatchLowercase}
-\defaultfontfeatures[\rmfamily]{Scale=1.0040657054} % use postscript pt
 \setmainfont{Times New Roman}
-  [Ligatures=TeX,
+[Ligatures=TeX,
+   Scale=1.0037562139,
    UprightFont=*,
    ItalicFont={* Italic},
    BoldFont={* Bold},
@@ -22,6 +22,21 @@
 \DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
 \DeclareTextFontCommand{\textsb}{\sbseries}
 % Times New Roman does not have light or semibold weights; use bold weight instead
+
+\setsansfont{Source Sans 3}
+  [Ligatures=TeX,
+   Scale=1.0037408433,
+   UprightFont=*,
+   ItalicFont={* Italic},
+   BoldFont={* Bold},
+   BoldItalicFont={* Bold Italic},
+   FontFace={l}{n}{* Light},
+   FontFace={l}{it}{* Light Italic},
+   FontFace={sb}{n}{* SemiBold},
+   FontFace={sb}{it}{* SemiBold Italic},
+   FontFace={eb}{n}{* Black},
+   FontFace={eb}{it}{* Black Italic}
+  ]
 
 \setmonofont{Source Code Pro}[Scale=MatchUppercase]
 
@@ -70,14 +85,14 @@
 \usepackage{titlesec}
 \newcommand{\addperiod}[1]{#1.}
 \titleformat{\section}{\normalsize\rmfamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
-\titlespacing*{\section}{0pt}{\parskip}{-\parskip}
+\titlespacing*{\section}{0pt}{\baselineskip}{-\parskip}
 \titleformat{\subsection}{\normalsize\rmfamily\bfseries\itshape\color{themecolour}}{\thetitle.}{0.5em}{}
 \titlespacing*{\subsection}{0pt}{\parskip}{-\parskip}
 \titleformat{\subsubsection}[runin]{\normalsize\bfseries\color{themecolour}}{\thetitle}{}{\addperiod}
 \titlespacing*{\subsubsection}{0pt}{0pt}{1ex}
-\titleformat{\paragraph}[runin]{\normalsize\bfseries\itshape\color{themecolour}}{\thetitle}{}{\addperiod}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries\itshape}{\thetitle}{}{\addperiod}
 \titlespacing{\paragraph}{0pt}{0pt}{1ex}
-\titleformat{\subparagraph}[runin]{\normalsize\itshape\color{themecolour}}{\thetitle}{}{\addperiod}
+\titleformat{\subparagraph}[runin]{\normalsize\itshape}{\thetitle}{}{\addperiod}
 \titlespacing{\subparagraph}{0pt}{0pt}{1ex}
 
 % Reduce spacing in list environments:
