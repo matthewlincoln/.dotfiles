@@ -169,6 +169,9 @@
                  (string-match-p (regexp-quote "N/A") battery-str))
       (display-battery-mode 1))))
 
+;; display current and total match in modeline:
+(global-anzu-mode)
+
 ;; add word count to modeline in org-mode
 (after! doom-modeline
   ;; (add-to-list 'doom-modeline-continuous-word-count-modes 'org-mode)
@@ -347,6 +350,7 @@
       "s-f" #'isearch-forward
       :map isearch-mode-map
       "s-f" #'isearch-repeat-forward
+      "s-F" #'isearch-repeat-backward
       "s-g" #'isearch-repeat-forward
       "s-d" #'mc/mark-next-like-this-word)
 
