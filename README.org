@@ -74,7 +74,7 @@ The following configuration files are included:
 This config assumes the emacs-mac port from [[https://github.com/railwaycat/homebrew-emacsmacport][railwaycat]]:
 
 #+begin_src zsh
-brew install emacs-mac --with-glib --with-imagemagick --with-no-title-bars --with-native-comp
+brew install emacs-mac --with-glib --with-imagemagick --with-natural-title-bar --with-native-comp
 #+end_src
 
 Note that we compile with =native-comp= support.
