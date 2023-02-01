@@ -81,6 +81,20 @@ brew install emacs-mac --with-glib --with-imagemagick --with-natural-title-bar -
 
 Note that we compile with =native-comp= support.
 
+*** doom-emacs
+We use the [[https://github.com/doomemacs/doomemacs][Doom Emacs]] configuration framework. We first install dependencies:
+
+#+begin_src zsh
+brew install git ripgrep fd
+#+end_src
+
+We next clone the Doom repository and install:
+
+#+begin_src zsh
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+#+end_src
+
 To infer title bar colour from the present theme, we need to update Emacs defaults:
 
 #+begin_src zsh
