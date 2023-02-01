@@ -33,6 +33,7 @@ dotfiles config --local status.showUntrackedFiles no
 Finally, configure to track the main branch:
 
 #+begin_src zsh
+mkdir -p ~/.ssh/tmp
 dotfiles push --set-upstream origin main
 #+end_src
 
