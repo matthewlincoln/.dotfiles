@@ -106,6 +106,17 @@ We use the [[https://www.nordtheme.com][Nord]] colour palette for iTerm2. This i
 
 Previously, we used the [[https://github.com/voronianski/oceanic-next-color-scheme][Oceanic Next]] colour palette, available [[https://github.com/mhartington/oceanic-next-iterm/blob/master/Oceanic-Next.itermcolors][here]].
 
+** Warp
+We use the [[https://www.nordtheme.com][Nord]] colour palette for Warp. This is available in a themes repo from the warp developers:
+
+#+begin_src zsh
+mkdir -p ~/.warp
+cd ~/.warp
+git clone https://github.com/warpdotdev/themes.git
+#+end_src
+
+To install, restart Warp and set through the Warp > Settings... > Appearance.. menu.
+
 ** RStudio
 We use the [[https://www.nordtheme.com][Nord]] colour palette for RStudio. This is available as an =rstheme= file from [[https://github.com/edavidaja/nord-rstudio/blob/master/Nord.rstheme][here]].
 
