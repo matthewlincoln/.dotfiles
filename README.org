@@ -70,6 +70,15 @@ The following configuration files are included:
 | .config/rstudio/Oceanic Next.rstheme     | RStudio theme file                                        |
 | .config/rstudio/Nord.rstheme             | RStudio theme file                                        |
 
+* MacOS Configuration Details
+It is helpful to set a few [[https://medium.com/swlh/top-mac-os-default-behaviors-you-should-consider-changing-419b679fe290][defaults]]:
+
+#+begin_src zsh
+defaults write -g AppleShowAllExtensions -bool true # show all extensions
+defaults write com.apple.finder AppleShowAllFiles true # show all files in Finder
+defaults write com.apple.finder ShowPathbar -bool true # show path bar in Finder
+#+end_src
+
 * Program-Specific Configuration Details
 ** Emacs
 This config assumes the emacs-mac port from [[https://github.com/railwaycat/homebrew-emacsmacport][railwaycat]]:
