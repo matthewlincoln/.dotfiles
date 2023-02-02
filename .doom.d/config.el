@@ -73,8 +73,8 @@
       tramp-inline-compress-start-size 1000000)
 
 ;; Maximize emacs window on laptop:
-(if (or (string= (system-name) "gandalf")
-        (string= (system-name) "gandalf.local"))
+(if (or (string-match-p "^gandalf" (system-name))
+        (string-match-p "^elrond" (system-name)))
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (progn (add-to-list 'default-frame-alist '(width . 250))
          (add-to-list 'default-frame-alist '(height . 70))
