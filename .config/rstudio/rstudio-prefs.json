@@ -1,5 +1,4 @@
 {
-    "show_indent_guides": true,
     "editor_theme": "Nord",
     "default_project_location": "~",
     "wrap_tab_navigation": false,
@@ -27,7 +26,8 @@
             "Plots",
             "Packages",
             "Help",
-            "Viewer"
+            "Viewer",
+            "Presentations"
         ],
         "console_left_on_top": false,
         "console_right_on_top": true
@@ -36,6 +36,13 @@
     "margin_column": 100,
     "posix_terminal_shell": "bash",
     "knit_working_dir": "project",
+    "pdf_previewer": "none",
+    "jobs_tab_visibility": "shown",
     "source_with_echo": true,
-    "pdf_previewer": "none"
+    "initial_working_directory": "~",
+    "highlight_selected_line": true,
+    "rainbow_parentheses": true,
+    "strip_trailing_whitespace": true,
+    "show_help_tooltip_on_idle": true,
+    "syntax_color_console": true
 }
