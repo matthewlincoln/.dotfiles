@@ -1,0 +1,103 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% mrl-preamble-r.tex
+%
+% This LaTeX file is included in the Rmarkdown preamble.
+
+% Use fancyhdr to redefine plain page style to use sans serif font for page number:
+% (this style is applied to the first page)
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{\sffamily\thepage}
+}
+
+% Modify fancyhdr's fancy style to be identical; this style is applied to all pages after the first:
+% (this style could be easily modified as needed)
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{\sffamily\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\pagestyle{fancy}
+
+
+% Define theme colour:
+% \usepackage[dvipsnames]{xcolor}
+\definecolor{themecolour}{HTML}{00205B} % Pantone 281C
+
+% Change the title font:
+\usepackage{titling}
+\pretitle{\begin{center}\Large\sffamily\bfseries\color{themecolour}}
+\posttitle{\par\end{center}}
+\preauthor{\vspace{2ex}\begin{center}}
+\postauthor{\end{center}}
+\predate{\begin{center}}
+\postdate{\end{center}}
+
+% Adjust paragraph spacing:
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+
+
+% Format table of contents:
+\usepackage[titles]{tocloft}
+% Adjust spacing:
+\setlength{\cftbeforesecskip}{1\parskip}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsubsecindent}{0pt}
+% Adjust fonts:
+\renewcommand{\cfttoctitlefont}{\normalsize\sffamily\bfseries\color{themecolour}}
+\renewcommand{\cftsecfont}{\small\sffamily\bfseries}
+\renewcommand{\cftsubsecfont}{\small\sffamily\itshape}
+
+
+% Style section headers:
+\usepackage{titlesec}
+\titleformat{\section}{\large\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\section}{0pt}{\baselineskip}{\parskip}
+\titleformat{\subsection}{\normalsize\sffamily\bfseries\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{0.5\baselineskip}{0pt}
+\titleformat{\subsubsection}{\normalsize\sffamily\bfseries\itshape\color{themecolour}}{\thetitle.}{0.5em}{}
+\titlespacing*{\subsubsection}{0pt}{0.5\baselineskip}{0pt}
+
+
+% Change font for figure labels:
+\usepackage[font=small,
+            labelfont={color=themecolour,bf,sf},
+            textfont=sf,
+            justification=justified,singlelinecheck=false]{caption}
+\captionsetup[table]{skip=4pt}
+
+% Change the table font:
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\sffamily}
+\AtBeginEnvironment{tabular}{\sffamily}
+\AtBeginEnvironment{tabularx}{\sffamily}
+
+
+% Prevent figures from floating:
+% (from https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc/33801326#33801326)
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+  \expandafter\origfigure\expandafter[H]
+} {
+  \endorigfigure
+}
+
+
+% Allow landscape orientation for large plots:
+\usepackage{pdflscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+
+\usepackage{subfig}
+
+
+\raggedbottom
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
