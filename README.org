@@ -130,3 +130,34 @@ To install, restart Warp and set through the Warp > Settings... > Appearance.. m
 We use the [[https://www.nordtheme.com][Nord]] colour palette for RStudio. This is available as an =rstheme= file from [[https://github.com/edavidaja/nord-rstudio/blob/master/Nord.rstheme][here]].
 
 Previously, we used the [[https://github.com/voronianski/oceanic-next-color-scheme][Oceanic Next]] colour palette. This is available as a =tmTheme= file [[https://github.com/voronianski/oceanic-next-color-scheme/blob/master/Oceanic%20Next.tmTheme][here]]. RStudio converts this on input to an =rstheme= file.
+
+** zsh
+We use the [[https://ohmyz.sh/][Oh My Zsh]] configuration framework for zsh. This is installed by running the installer script directly:
+
+#+begin_src zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#+end_src
+
+This script creates a =~/.oh-my-zsh= folder and replaces the existing =.zshrc=. The old =.zshrc= is stored in =.zshrc.pre-oh-my-zsh=. We copy the contents of this file to the end of the new =.zshrc=.
+
+We additionally use the PowerLevel10K theme for Oh My Zsh. We install this by cloning the theme repository into the existing =~/.oh-my-zsh= folder:
+
+#+begin_src zsh
+git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+#+end_src
+
+This theme is then installed by changing the =ZSH_THEME= variable in =.zshrc=:
+
+#+begin_src zsh
+ZSH_THEME="powerlevel10k/powerlevel10k"
+#+end_src
+
+The next time we restart the terminal, the PowerLevel10K configuation is run. This can also be be done manually:
+
+#+begin_src zsh
+p10k configure
+#+end_src
+
+We use the recommended Meslo Nerd Font that has been patched for PowerLevel10K. This is installed by the configuration script, but can also be downloaded [[https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k][here]].
+
+Note that complete instructions for this configuration are found [[https://www.josean.com/posts/terminal-setup][here]].
