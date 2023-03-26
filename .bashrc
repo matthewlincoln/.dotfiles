@@ -4,6 +4,21 @@ PS1="\u@\h \W \$ "
 # Add ~/bin to path:
 export PATH="$PATH:~/bin"
 
+# Manage legacy Python 2.7 through pyenv on macOS:
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  # Use system python by default:
+  pyenv global system
+  ### pyenv global 2.7.18 to switch to local instance of python 2.7
+fi
+
+# Add anaconda to path on macOS:
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  path+=/opt/homebrew/anaconda3/bin
+fi
+
 # Set aliases:
 alias ll="ls -FGlAhp"
 alias llr="ls -FGlAhprt"

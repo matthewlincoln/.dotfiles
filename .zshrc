@@ -116,16 +116,20 @@ source $ZSH/oh-my-zsh.sh
 # Add ~/bin to path:
 path+=~/bin
 
-# Add anaconda to path:
-path+=/opt/homebrew/anaconda3/bin
+# Manage legacy Python 2.7 through pyenv on macOS:
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  # Use system python by default:
+  pyenv global system
+  ### pyenv global 2.7.18 to switch to local instance of python 2.7
+fi
 
-# Manage legacy Python 2.7 through pyenv:
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# Use system python by default:
-pyenv global system
-### pyenv global 2.7.18 to switch to local instance of python 2.7
+# Add anaconda to path on macOS:
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  path+=/opt/homebrew/anaconda3/bin
+fi
 
 # Set aliases:
 alias ll="ls -FGlAhp"
