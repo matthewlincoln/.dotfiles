@@ -17,6 +17,8 @@ fi
 # Add anaconda to path on macOS:
 if [[ "$OSTYPE" == "darwin"* ]]; then
   path+=/opt/homebrew/anaconda3/bin
+else
+  export PATH="$PATH:~/anaconda2/bin"
 fi
 
 # Set aliases:
