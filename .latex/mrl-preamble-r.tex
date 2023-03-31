@@ -50,9 +50,10 @@
 \setlength{\cftsubsubsecindent}{0pt}
 % Adjust fonts:
 \renewcommand{\cfttoctitlefont}{\normalsize\sffamily\bfseries\color{themecolour}}
-\renewcommand{\cftsecfont}{\small\sffamily\bfseries}
+\renewcommand{\cftsecfont}{\small\sffamily}
+\renewcommand{\cftsecpagefont}{\small\sffamily}
 \renewcommand{\cftsubsecfont}{\small\sffamily\itshape}
-
+\renewcommand{\cftsubsecpagefont}{\small\sffamily\itshape}
 
 % Style section headers:
 \usepackage{titlesec}
@@ -98,6 +99,12 @@
 
 \usepackage{subfig}
 
+% Increase line spacing
+\usepackage{setspace}
+% \onehalfspacing
+
+% Do not put extra space after periods
+\frenchspacing
 
 \raggedbottom
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
