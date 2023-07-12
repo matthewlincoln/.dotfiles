@@ -1,0 +1,36 @@
+{
+    "workbench.colorTheme": "Oceanic Next",
+    "editor.minimap.autohide": true,
+    "files.autoSave": "afterDelay",
+    "workbench.colorCustomizations": {
+        "[Oceanic Next]": {
+            // Give status bar default colours of activity bar:
+            "statusBar.background": "#333333",
+            "statusBar.foreground": "#ffffff66",
+            "statusBar.border": "#1e1e1e",
+            "statusBar.debuggingBackground": "#333333",
+            "statusBar.debuggingForeground": "#ffffff66",
+            "statusBar.debuggingBorder": "#1e1e1e",
+            "statusBar.noFolderBackground": "#333333",
+            "statusBar.noFolderForeground": "#ffffff66",
+            "statusBar.noFolderBorder": "#1e1e1e",
+            "statusBarItem.remoteBackground": "#333333",
+            "statusBarItem.remoteForeground": "#ffffff66",
+            "editorCursor.background": "#FAC863",
+		    "editorCursor.foreground": "#FAC863",
+            "terminalCursor.foreground": "#FAC863",
+            "terminalCursor.background": "#FAC863",
+            "panel.background": "#16222a" // background colour (#1b2b34) darkened by 20%
+        }
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.opacity": 0.9,
+    "material-icon-theme.saturation": 0.8,
+    "terminal.integrated.defaultProfile.osx": "bash",
+    "telemetry.telemetryLevel": "off",
+    "gitlens.telemetry.enabled": false,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorWidth": 2,
+    "workbench.panel.defaultLocation": "right"
+}
