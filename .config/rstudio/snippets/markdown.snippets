@@ -1,0 +1,94 @@
+snippet [
+	[${1:label}](${2:location})
+
+snippet ![
+	![${1:label}](${2:location})
+
+snippet r
+	```{r ${1:label}, ${2:options}}
+	${0}
+	```
+snippet rcpp
+	```{r, engine='Rcpp'}
+	#include <Rcpp.h>
+	using namespace Rcpp;
+	
+	${0}
+	
+	```
+
+# My personal snippets:	
+snippet template
+	---
+	title: "${1:title}"
+	author: Matthew R Lincoln \emph{MD DPhil FRCPC}
+	date: \today
+	output:
+	  bookdown::pdf_document2:
+	  df_print: kable
+	dev: cairo_pdf
+	keep_tex: yes
+	latex_engine: xelatex
+	includes:
+	  in_header: ~/.latex/mrl-preamble-r.tex
+	  # before_body: null
+	  # after_body: null
+	bibliography: ${2:bibliography}.bib
+	csl: /Users/lincoln/Zotero/styles/american-medical-association-parentheses.csl
+	documentclass: article
+	geometry: margin=0.75in
+	mainfont: Minion Pro
+	sansfont: Myriad Pro Light
+	monofont: Menlo
+	fontsize: 11pt
+	toc: yes
+	toc-depth: 2
+	urlcolor: themecolour
+	linkcolor: black
+	---
+	
+	```{r setup, include = FALSE}
+	# Single space code blocks (taken from https://stackoverflow.com/questions/56704022/how-can-i-automate-different-spacing-between-text-and-code-blocks-in-r-markdown)
+	# hook_chunk = knitr::knit_hooks$get('chunk')
+	# 
+	# knitr::knit_hooks$set(chunk = function(x, options) {
+	#   regular_output = hook_chunk(x, options)
+	#   # add latex commands if chunk option singlespacing is TRUE
+	#   if (isTRUE(options$singlespacing) & isTRUE(options$echo)) 
+	#     sprintf("\\singlespacing\n %s \n\\onehalfspacing", regular_output)
+	#   else
+	#     regular_output
+	# })
+	
+	# Set default chunk options:
+	knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+	                      singlespacing = TRUE,
+	                      cache = TRUE,
+	                      fig.width = 7, fig.height = 4)
+	
+	
+	# Format inline results to have two significant digits:
+	inline_hook <- function(x) {
+	  if (is.numeric(x)) {
+	    format(x, digits = 2)
+	  } else x
+	}
+	knitr::knit_hooks$set(inline = inline_hook)
+	### Code from https://stackoverflow.com/questions/30888631/knitr-displaying-digits-of-an-integer-without-scientific-notation
+	
+	
+	# Make some tweaks to the base theme:
+	theme_mrl <- function() { theme_light(base_size = 8, base_family = "Myriad Pro") }
+	
+	theme.colours <- c("#00205B", # Pantone 281C
+	                   "#B7B09C", # Pantone 7535C
+	                   "#00585E", # Pantone 19-4524 TCX Shaded Spruce
+	                   "#005780", # Pantone 18-4434 TCX Mykonos Blue
+	                   "#9bb9b5", # Pantone 4171C
+	                   "#D6D2C4"  # Pantone 7527C
+	)
+	
+	library(conflicted)
+	library(tidyverse)
+	```
+	${3}
