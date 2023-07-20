@@ -10,7 +10,7 @@
   \fancyhf{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
-  \fancyfoot[C]{\sffamily\thepage}
+  % \fancyfoot[C]{\sffamily\thepage}
 }
 
 % Modify fancyhdr's fancy style to be identical; this style is applied to all pages after the first:
@@ -21,7 +21,6 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \pagestyle{fancy}
-
 
 % Define theme colour:
 % \usepackage[dvipsnames]{xcolor}
@@ -40,22 +39,25 @@
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1ex}
 
-
 % Format table of contents:
 \usepackage[titles]{tocloft}
 % Adjust spacing:
-\setlength{\cftbeforesecskip}{1\parskip}
+\setlength{\cftbeforesecskip}{0pt}
 \setlength{\cftsecindent}{0pt}
 \setlength{\cftsubsecindent}{0pt}
 \setlength{\cftsubsubsecindent}{0pt}
 % Adjust fonts:
-\renewcommand{\cfttoctitlefont}{\normalsize\sffamily\bfseries\color{themecolour}}
-\renewcommand{\cftsecfont}{\small\sffamily}
-\renewcommand{\cftsecpagefont}{\small\sffamily}
-\renewcommand{\cftsubsecfont}{\small\sffamily\itshape}
-\renewcommand{\cftsubsecpagefont}{\small\sffamily\itshape}
+\renewcommand{\cfttoctitlefont}{\normalsize\rmfamily\bfseries\color{themecolour}}
+\renewcommand{\cftsecfont}{\small\rmfamily}
+\renewcommand{\cftsecpagefont}{\small\rmfamily}
+\renewcommand{\cftsubsecfont}{\small\rmfamily\itshape}
+\renewcommand{\cftsubsecpagefont}{\small\rmfamily\itshape}
 % Remove dot leaders:
 \renewcommand{\cftdot}{}
+% Adjust spacing:
+\setlength\cftsecnumwidth{1em}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
 
 % Style section headers:
 \usepackage{titlesec}
@@ -65,7 +67,6 @@
 \titlespacing*{\subsection}{0pt}{0.5\baselineskip}{0pt}
 \titleformat{\subsubsection}{\normalsize\sffamily\bfseries\itshape\color{themecolour}}{\thetitle.}{0.5em}{}
 \titlespacing*{\subsubsection}{0pt}{0.5\baselineskip}{0pt}
-
 
 % Change font for figure labels:
 \usepackage[font=small,
@@ -80,6 +81,20 @@
 \AtBeginEnvironment{tabular}{\sffamily}
 \AtBeginEnvironment{tabularx}{\sffamily}
 
+% Reduce spacing in list environments:
+\usepackage{enumitem}
+% Indent lists to align with references:
+\setlist[enumerate,itemize]{
+  left=0pt .. 1.5em,
+  topsep=0pt,
+  itemsep=0pt,
+  parsep=0pt
+}
+
+% Add space at beginning of references
+\AtBeginEnvironment{CSLReferences}{\vspace{\parskip}}
+% Adjust reference indent:
+\setlength{\csllabelwidth}{1.5em}
 
 % Prevent figures from floating:
 % (from https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc/33801326#33801326)
@@ -87,17 +102,16 @@
 \let\origfigure\figure
 \let\endorigfigure\endfigure
 \renewenvironment{figure}[1][2] {
-  \expandafter\origfigure\expandafter[H]
+  % \expandafter\origfigure\expandafter[H]
+  \expandafter\origfigure\expandafter[h]
 } {
   \endorigfigure
 }
-
 
 % Allow landscape orientation for large plots:
 \usepackage{pdflscape}
 \newcommand{\blandscape}{\begin{landscape}}
 \newcommand{\elandscape}{\end{landscape}}
-
 
 \usepackage{subfig}
 
@@ -105,12 +119,33 @@
 \usepackage{setspace}
 % \onehalfspacing
 
-
 % Remove indent from footnotes:
-\usepackage[hang,flushmargin]{footmisc}
+\usepackage[hang,flushmargin,norule,perpage,symbol*]{footmisc}
+
+% Use sans serif for footnotes:
+% This is taken from https://tex.stackexchange.com/questions/393179/bigfoot-make-sans-serif-footnote
+\usepackage{bigfoot}
+\usepackage{xpatch}
+\newfootnote[plain]{default}
+\xpatchcmd{\@makefnstartbox}{%
+\footnotesize}%
+{\footnotesize\sffamily}{}{}
+% \xpatchcmd{\@makefnmark}{\normalfont}{\sffamily}{}{}
+
+% Enable hyperlinks for paper URLs:
+% \usepackage{hyperref}
+% \hypersetup{
+%   hyperfootnotes=false,
+%   colorlinks=true,
+%   citecolor=themecolour,
+%   urlcolor=themecolour,
+%   linkcolor=.
+% }
 
 % Do not put extra space after periods
 \frenchspacing
 
 \raggedbottom
+
+\singlespace
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
