@@ -44,8 +44,13 @@
 % Adjust spacing:
 \setlength{\cftbeforesecskip}{0pt}
 \setlength{\cftsecindent}{0pt}
-\setlength{\cftsubsecindent}{0pt}
-\setlength{\cftsubsubsecindent}{0pt}
+\setlength{\cftsubsecindent}{1.5em}
+% \setlength{\cftsubsubsecindent}{0pt}
+\setlength\cftsecnumwidth{1.5em}
+\setlength\cftsubsecnumwidth{2.3em}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+
 % Adjust fonts:
 \renewcommand{\cfttoctitlefont}{\normalsize\rmfamily\bfseries\color{themecolour}}
 \renewcommand{\cftsecfont}{\small\rmfamily}
@@ -53,11 +58,7 @@
 \renewcommand{\cftsubsecfont}{\small\rmfamily\itshape}
 \renewcommand{\cftsubsecpagefont}{\small\rmfamily\itshape}
 % Remove dot leaders:
-\renewcommand{\cftdot}{}
-% Adjust spacing:
-\setlength\cftsecnumwidth{1em}
-\renewcommand{\cftsecaftersnum}{.}
-\renewcommand{\cftsubsecaftersnum}{.}
+% \renewcommand{\cftdot}{}
 
 % Style section headers:
 \usepackage{titlesec}
@@ -94,6 +95,8 @@
 % Add space at beginning of references
 \AtBeginEnvironment{CSLReferences}{\vspace{\parskip}}
 % Adjust reference indent:
+\let\csllabelwidth\relax % avoid throwing an error if csllabelwidth already defined
+\newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{1.5em}
 
 % Prevent figures from floating:
