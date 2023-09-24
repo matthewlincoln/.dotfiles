@@ -49,9 +49,9 @@ snippet template
 	
 	```{r setup, include = FALSE}
 	# Single space code blocks (taken from https://stackoverflow.com/questions/56704022/how-can-i-automate-different-spacing-between-text-and-code-blocks-in-r-markdown)
-	# hook_chunk = knitr::knit_hooks$get('chunk')
+	# hook_chunk = knitr::knit_hooks\$get('chunk')
 	# 
-	# knitr::knit_hooks$set(chunk = function(x, options) {
+	# knitr::knit_hooks\$set(chunk = function(x, options) {
 	#   regular_output = hook_chunk(x, options)
 	#   # add latex commands if chunk option singlespacing is TRUE
 	#   if (isTRUE(options$singlespacing) & isTRUE(options$echo)) 
@@ -61,7 +61,7 @@ snippet template
 	# })
 	
 	# Set default chunk options:
-	knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+	knitr::opts_chunk\$set(echo = FALSE, warning = FALSE, message = FALSE,
 	                      singlespacing = TRUE,
 	                      cache = TRUE,
 	                      fig.width = 7, fig.height = 4)
@@ -73,7 +73,7 @@ snippet template
 	    format(x, digits = 2)
 	  } else x
 	}
-	knitr::knit_hooks$set(inline = inline_hook)
+	knitr::knit_hooks\$set(inline = inline_hook)
 	### Code from https://stackoverflow.com/questions/30888631/knitr-displaying-digits-of-an-integer-without-scientific-notation
 	
 	
