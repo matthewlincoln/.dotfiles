@@ -44,5 +44,7 @@
     "rainbow_parentheses": true,
     "strip_trailing_whitespace": true,
     "show_help_tooltip_on_idle": true,
-    "syntax_color_console": true
+    "syntax_color_console": true,
+    "rmd_viewer_type": "none",
+    "default_latex_program": "XeLaTeX"
 }
