@@ -123,7 +123,7 @@ $endif$
 
 % Set a few KOMA class options:
 \KOMAoptions{numbers=endperiod,
-             parskip=half,
+             % parskip=half,
              captions=nooneline%,
              % footnotes=multiple
              }
@@ -139,6 +139,7 @@ $endif$
   beforeskip=\parskip,
   afterskip=0pt,
   runin=false,
+  afterindent=false,
   font=\normalsize\sffamily\sbseries\color{themecolour},
   tocentryformat=\footnotesize\rmfamily\lseries\addfontfeatures{Numbers=Monospaced},
   tocpagenumberformat=\footnotesize\rmfamily\lseries\addfontfeatures{Numbers=Monospaced}
@@ -147,6 +148,7 @@ $endif$
   beforeskip=0pt,
   afterskip=-\parskip,
   runin=false,
+  afterindent=false,
   font=\normalsize\sffamily\sbseries\color{themecolour},
   tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
   tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
@@ -155,6 +157,7 @@ $endif$
   beforeskip=0pt,
   afterskip=-\parskip,
   runin=false,
+  afterindent=false,
   font=\normalsize\sffamily\sbseries\itshape\color{themecolour},
   tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
   tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
@@ -163,6 +166,8 @@ $endif$
   beforeskip=0pt,
   afterskip=0.5em,
   runin=true,
+  indent=0pt,
+  afterindent=false,
   font=\normalsize\sffamily\sbseries\color{themecolour}
   % tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
   % tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
@@ -171,6 +176,8 @@ $endif$
   beforeskip=0pt,
   afterskip=0.5em,
   runin=true,
+  indent=0pt,
+  afterindent=false,
   font=\normalsize\sffamily\sbseries\itshape\color{themecolour}
   % tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
   % tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
@@ -211,23 +218,22 @@ $endif$
 \usepackage[hang,flushmargin,norule,perpage,symbol*,multiple]{footmisc}
 
 % Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
+% \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% \IfFileExists{microtype.sty}{% use microtype if available
+%   \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
+%   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+% }{}
 $if(indent)$
+\RedeclareSectionCommand[beforeskip=0.5\baselineskip,afterskip=0.25\baselineskip]{section}
+\RedeclareSectionCommand[beforeskip=0.5\baselineskip]{subsection}
+\RedeclareSectionCommand[beforeskip=0.5\baselineskip]{subsubsection}
 $else$
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
+\KOMAoptions{parskip=half}
+$endif$
+$if(linenum)$
+\usepackage{lineno}
+\linenumbers
+%%% Note that this doesn't seem to work with code blocks formatted with the framed package
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
