@@ -123,10 +123,7 @@ $endif$
 
 % Set a few KOMA class options:
 \KOMAoptions{numbers=endperiod,
-             % parskip=half,
-             captions=nooneline%,
-             % footnotes=multiple
-             }
+             captions=nooneline}
 
 % Style abstract and document titles:
 \setkomafont{disposition}{\normalsize\sbseries\color{themecolour}}
@@ -205,11 +202,11 @@ $endif$
 \usepackage{enumitem}
 % Adjust spacing in list environments:
 \setlist[enumerate,itemize]{
-  % left=0pt .. 1.5em,
   left=0.25in .. 0.5in,
   topsep=-\parskip,
   itemsep=0pt,
   parsep=0pt
+  % after=\vspace{0.5\baselineskip}
 }
 \AtBeginEnvironment{enumerate}{\addfontfeatures{Numbers=Monospaced}}
 \AtBeginEnvironment{itemize}{\addfontfeatures{Numbers=Monospaced}}
