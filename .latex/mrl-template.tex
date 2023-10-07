@@ -21,7 +21,7 @@ $endif$
 $for(classoption)$
   $classoption$$sep$,
 $endfor$
-]{$documentclass$}
+]{$if(class)$$class$$else$scrartcl$endif$}
 % \usepackage{amsmath,amssymb}
 \usepackage[retainmissing]{MnSymbol}
 $if(fontfamily)$
