@@ -13,7 +13,7 @@
 $if(fontsize)$
   $fontsize$,
 $else$
-  11pt,
+  11bp,
 $endif$
 $if(papersize)$
   $papersize$paper,
@@ -24,14 +24,12 @@ $endfor$
 ]{$if(class)$$class$$else$scrartcl$endif$}
 \usepackage{amsmath,amssymb}
 % \usepackage[retainmissing]{MnSymbol}
-$if(fontfamily)$
-\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-$else$
-\usepackage{lmodern}
+% $if(fontfamily)$
+% \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+% $else$
+% \usepackage{lmodern}
 % \usepackage{fontspec}
-% \defaultfontfeatures{Scale=MatchLowercase}
-% \defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
-$endif$
+% $endif$
 \usepackage{etoolbox}
 $if(linestretch)$
 \usepackage{setspace}
@@ -48,8 +46,8 @@ $endif$
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
   \usepackage{fontspec}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
+  % \defaultfontfeatures{Scale=MatchLowercase}
+  % \defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
 $if(mathspec)$
 \ifXeTeX
   \usepackage{mathspec}
@@ -62,52 +60,60 @@ $else$
 $endif$
 % \defaultfontfeatures{Scale=MatchLowercase}
 % \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\defaultfontfeatures[Inter]{
-  Ligatures = TeX,
-  % Numbers = Tabular,
-  FontFace={l}{n}{Font={*-Light}},
-  FontFace={l}{it}{Font={*-LightItalic}},
-  UprightFont=*-Regular,
-  ItalicFont=*-Italic,
-  FontFace={mb}{n}{Font={*-Medium}},
-  FontFace={mb}{it}{Font={*-MediumItalic}},
-  FontFace={sb}{n}{Font={*-SemiBold}},
-  FontFace={sb}{it}{Font={*-SemiBoldItalic}},
-  BoldFont=*-Bold,
-  BoldItalicFont=*-BoldItalic,
-  FontFace={eb}{n}{Font={*-ExtraBold}},
-  FontFace={eb}{it}{Font={*-ExtraBoldItalic}}
-}
-
-\DeclareRobustCommand{\lseries}{\fontseries{l}\selectfont}
-\DeclareTextFontCommand{\textl}{\lseries}
-\DeclareRobustCommand{\mbseries}{\fontseries{mb}\selectfont}
-\DeclareTextFontCommand{\textmb}{\mbseries}
-\DeclareRobustCommand{\sbseries}{\fontseries{sb}\selectfont}
-\DeclareTextFontCommand{\textsb}{\sbseries}
-% \DeclareRobustCommand{\bfseries}{\fontseries{b}\selectfont}
-% \DeclareTextFontCommand{\textbf}{\bfseries}
-\DeclareRobustCommand{\ebseries}{\fontseries{eb}\selectfont}
-\DeclareTextFontCommand{\texteb}{\ebseries}
 
 $if(mainfont)$
 \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $else$
-\setmainfont{Inter}
+\setmainfont[
+  Ligatures = TeX,
+  % Numbers = Tabular,
+  FontFace={t}{n}{Font={*-Thin}},
+  FontFace={t}{it}{Font={*-ThinItalic}},
+  FontFace={l}{n}{Font={*-Light}},
+  FontFace={l}{it}{Font={*-LightItalic}},
+  UprightFont=*,
+  ItalicFont=*-Italic,
+  FontFace={mb}{n}{Font={*-Medium}},
+  FontFace={mb}{it}{Font={*-MediumItalic}},
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldItalic,
+]{HelveticaNeue}
 $endif$
 $if(sansfont)$
 \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $else$
-\setsansfont{Inter}
+\setsansfont[
+  Ligatures = TeX,
+  FontFace={t}{n}{Font={*-Thin}},
+  FontFace={t}{it}{Font={*-ThinItalic}},
+  FontFace={l}{n}{Font={*-Light}},
+  FontFace={l}{it}{Font={*-LightItalic}},
+  UprightFont=*,
+  ItalicFont=*-Italic,
+  FontFace={mb}{n}{Font={*-Medium}},
+  FontFace={mb}{it}{Font={*-MediumItalic}},
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldItalic,
+]{HelveticaNeue}
 $endif$
 $if(monofont)$
 \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
 $else$
 \setmonofont{Source Code Pro}[Scale=MatchUppercase]
 $endif$
-$for(fontfamilies)$
-  \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
-$endfor$
+
+\DeclareRobustCommand{\tseries}{\fontseries{t}\selectfont}
+\DeclareTextFontCommand{\textt}{\tseries}
+\DeclareRobustCommand{\lseries}{\fontseries{l}\selectfont}
+\DeclareTextFontCommand{\textl}{\lseries}
+\DeclareRobustCommand{\mbseries}{\fontseries{mb}\selectfont}
+\DeclareTextFontCommand{\textmb}{\mbseries}
+\DeclareRobustCommand{\bfseries}{\fontseries{b}\selectfont}
+\DeclareTextFontCommand{\textbf}{\bfseries}
+
+% $for(fontfamilies)$
+%   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
+% $endfor$
 $if(mathfont)$
 $if(mathspec)$
   \ifXeTeX
@@ -119,15 +125,14 @@ $else$
   \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
 $endif$
-\fi
 
 % Set a few KOMA class options:
 \KOMAoptions{numbers=endperiod,
              captions=nooneline}
 
 % Style abstract and document titles:
-\setkomafont{disposition}{\normalsize\sbseries\color{themecolour}}
-\setkomafont{title}{\sffamily\sbseries\color{themecolour}}
+\setkomafont{disposition}{\normalsize\mbseries\color{themecolour}}
+\setkomafont{title}{\sffamily\mbseries\color{themecolour}}
 
 % Remove TOC title:
 \deftocheading{toc}{}
@@ -137,27 +142,27 @@ $endif$
   afterskip=0pt,
   runin=false,
   afterindent=false,
-  font=\normalsize\sffamily\sbseries\color{themecolour},
-  tocentryformat=\footnotesize\rmfamily\lseries\addfontfeatures{Numbers=Monospaced},
-  tocpagenumberformat=\footnotesize\rmfamily\lseries\addfontfeatures{Numbers=Monospaced}
+  font=\normalsize\sffamily\mbseries\color{themecolour},
+  tocentryformat=\footnotesize\rmfamily\lseries,
+  tocpagenumberformat=\footnotesize\rmfamily\lseries
 ]{section}
 \RedeclareSectionCommand[
   beforeskip=0pt,
   afterskip=-\parskip,
   runin=false,
   afterindent=false,
-  font=\normalsize\sffamily\sbseries\color{themecolour},
-  tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
-  tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
+  font=\normalsize\sffamily\mbseries\color{themecolour},
+  tocentryformat=\footnotesize\rmfamily\lseries\itshape,
+  tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape
 ]{subsection}
 \RedeclareSectionCommand[
   beforeskip=0pt,
   afterskip=-\parskip,
   runin=false,
   afterindent=false,
-  font=\normalsize\sffamily\sbseries\itshape\color{themecolour},
-  tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
-  tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
+  font=\normalsize\sffamily\mbseries\itshape\color{themecolour},
+  tocentryformat=\footnotesize\rmfamily\lseries\itshape,
+  tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape
 ]{subsubsection}
 \RedeclareSectionCommand[
   beforeskip=0pt,
@@ -165,9 +170,9 @@ $endif$
   runin=true,
   indent=0pt,
   afterindent=false,
-  font=\normalsize\sffamily\sbseries\color{themecolour}
-  % tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
-  % tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
+  font=\normalsize\sffamily\mbseries\color{themecolour}
+  % tocentryformat=\footnotesize\rmfamily\lseries\itshape,
+  % tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape
 ]{paragraph}
 \RedeclareSectionCommand[
   beforeskip=0pt,
@@ -175,26 +180,26 @@ $endif$
   runin=true,
   indent=0pt,
   afterindent=false,
-  font=\normalsize\sffamily\sbseries\itshape\color{themecolour}
-  % tocentryformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced},
-  % tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape\addfontfeatures{Numbers=Monospaced}
+  font=\normalsize\sffamily\mbseries\itshape\color{themecolour}
+  % tocentryformat=\footnotesize\rmfamily\lseries\itshape,
+  % tocpagenumberformat=\footnotesize\rmfamily\lseries\itshape
 ]{subparagraph}
 
 % Reduce TOC spacing:
 \RedeclareSectionCommand[tocbeforeskip=0pt]{section}
 
 % Style figure captions:
-\setkomafont{caption}{\sffamily\lseries}
-\setkomafont{captionlabel}{\sffamily\mbseries\color{themecolour}}
+\setkomafont{caption}{\footnotesize\sffamily\lseries}
+\setkomafont{captionlabel}{\footnotesize\sffamily\mbseries\color{themecolour}}
 
 % Remove hanging indent from captions:
 \setcapindent{0pt}
 
 % Change the table font:
 \usepackage{etoolbox}
-\AtBeginEnvironment{longtable}{\sffamily\lseries\addfontfeatures{Numbers=Monospaced}}
-\AtBeginEnvironment{tabular}{\sffamily\lseries\addfontfeatures{Numbers=Monospaced}}
-\AtBeginEnvironment{tabularx}{\sffamily\lseries\addfontfeatures{Numbers=Monospaced}}
+\AtBeginEnvironment{longtable}{\sffamily\lseries}
+\AtBeginEnvironment{tabular}{\sffamily\lseries}
+\AtBeginEnvironment{tabularx}{\sffamily\lseries}
 % Add space at beginning of references:
 \AtBeginEnvironment{CSLReferences}{\vspace{\parskip}\small}
 
@@ -208,8 +213,6 @@ $endif$
   parsep=0pt
   % after=\vspace{0.5\baselineskip}
 }
-\AtBeginEnvironment{enumerate}{\addfontfeatures{Numbers=Monospaced}}
-\AtBeginEnvironment{itemize}{\addfontfeatures{Numbers=Monospaced}}
 
 % Remove indent from footnotes:
 \usepackage[hang,flushmargin,norule,perpage,symbol*,multiple]{footmisc}
@@ -337,7 +340,7 @@ $if(csl-refs)$
  {}
 \usepackage{calc}
 \newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\addfontfeatures{Numbers=Monospaced}#1}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
@@ -436,7 +439,7 @@ $if(subtitle)$
 $endif$
 
 \usepackage[blocks]{authblk}
-\renewcommand\Authfont{\normalsize\rmfamily\mbseries}
+\renewcommand\Authfont{\normalsize\rmfamily}
 \renewcommand\Affilfont{\rmfamily\footnotesize\lseries\itshape}
 % \setlength{\affilsep}{\parsep}
 $if(auths)$
