@@ -49,67 +49,56 @@ $endif$
   % \defaultfontfeatures{Scale=MatchLowercase}
   % \defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
 $if(mathspec)$
-\ifXeTeX
-  \usepackage{mathspec}
-\else
-  \usepackage{unicode-math}
-\fi
+  \ifXeTeX
+    \usepackage{mathspec}
+  \else
+    \usepackage{unicode-math}
+  \fi
 $else$
-\usepackage{unicode-math}
-\setmathfont{LibertinusMath-Regular.otf}
+  \usepackage{unicode-math}
 $endif$
-% \defaultfontfeatures{Scale=MatchLowercase}
-% \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 
 $if(mainfont)$
-\setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $else$
-\setmainfont[
-  Ligatures = TeX,
-  % Numbers = Tabular,
-  FontFace={t}{n}{Font={*-Thin}},
-  FontFace={t}{it}{Font={*-ThinItalic}},
-  FontFace={l}{n}{Font={*-Light}},
-  FontFace={l}{it}{Font={*-LightItalic}},
-  UprightFont=*,
-  ItalicFont=*-Italic,
-  FontFace={mb}{n}{Font={*-Medium}},
-  FontFace={mb}{it}{Font={*-MediumItalic}},
-  BoldFont=*-Bold,
-  BoldItalicFont=*-BoldItalic,
-]{HelveticaNeue}
+  \setmainfont[
+    Ligatures = TeX,
+    % Numbers = Tabular,
+    FontFace={t}{n}{Font={*-Thin}},
+    FontFace={t}{it}{Font={*-ThinItalic}},
+    FontFace={l}{n}{Font={*-Light}},
+    FontFace={l}{it}{Font={*-LightItalic}},
+    UprightFont=*,
+    ItalicFont=*-Italic,
+    FontFace={mb}{n}{Font={*-Medium}},
+    FontFace={mb}{it}{Font={*-MediumItalic}},
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldItalic,
+  ]{HelveticaNeue}
 $endif$
 $if(sansfont)$
-\setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $else$
-\setsansfont[
-  Ligatures = TeX,
-  FontFace={t}{n}{Font={*-Thin}},
-  FontFace={t}{it}{Font={*-ThinItalic}},
-  FontFace={l}{n}{Font={*-Light}},
-  FontFace={l}{it}{Font={*-LightItalic}},
-  UprightFont=*,
-  ItalicFont=*-Italic,
-  FontFace={mb}{n}{Font={*-Medium}},
-  FontFace={mb}{it}{Font={*-MediumItalic}},
-  BoldFont=*-Bold,
-  BoldItalicFont=*-BoldItalic,
-]{HelveticaNeue}
+  \setsansfont[
+    Ligatures = TeX,
+    FontFace={t}{n}{Font={*-Thin}},
+    FontFace={t}{it}{Font={*-ThinItalic}},
+    FontFace={l}{n}{Font={*-Light}},
+    FontFace={l}{it}{Font={*-LightItalic}},
+    UprightFont=*,
+    ItalicFont=*-Italic,
+    FontFace={mb}{n}{Font={*-Medium}},
+    FontFace={mb}{it}{Font={*-MediumItalic}},
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldItalic,
+  ]{HelveticaNeue}
 $endif$
 $if(monofont)$
-\setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
 $else$
-\setmonofont{Monaco}[Scale=MatchUppercase]
+  \setmonofont{Monaco}[Scale=MatchUppercase]
 $endif$
-
-\DeclareRobustCommand{\tseries}{\fontseries{t}\selectfont}
-\DeclareTextFontCommand{\textt}{\tseries}
-\DeclareRobustCommand{\lseries}{\fontseries{l}\selectfont}
-\DeclareTextFontCommand{\textl}{\lseries}
-\DeclareRobustCommand{\mbseries}{\fontseries{mb}\selectfont}
-\DeclareTextFontCommand{\textmb}{\mbseries}
-\DeclareRobustCommand{\bfseries}{\fontseries{b}\selectfont}
-\DeclareTextFontCommand{\textbf}{\bfseries}
+\fi
 
 % $for(fontfamilies)$
 %   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
@@ -125,6 +114,15 @@ $else$
   \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
 $endif$
+
+\DeclareRobustCommand{\tseries}{\fontseries{t}\selectfont}
+\DeclareTextFontCommand{\textt}{\tseries}
+\DeclareRobustCommand{\lseries}{\fontseries{l}\selectfont}
+\DeclareTextFontCommand{\textl}{\lseries}
+\DeclareRobustCommand{\mbseries}{\fontseries{mb}\selectfont}
+\DeclareTextFontCommand{\textmb}{\mbseries}
+\DeclareRobustCommand{\bfseries}{\fontseries{b}\selectfont}
+\DeclareTextFontCommand{\textbf}{\bfseries}
 
 % Set a few KOMA class options:
 \KOMAoptions{numbers=endperiod,
