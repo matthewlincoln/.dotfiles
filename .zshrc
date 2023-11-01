@@ -151,7 +151,6 @@ np () {
   mkdir -p $1/results
   mkdir -p $1/doc
 
-  echo ".gitignore" > $1/.gitignore
   touch $1/README.md
 
   git init $1
