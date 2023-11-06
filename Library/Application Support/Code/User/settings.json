@@ -1,7 +1,6 @@
 {
     "workbench.colorTheme": "Oceanic Next",
     "editor.minimap.autohide": true,
-    "files.autoSave": "afterDelay",
     "workbench.colorCustomizations": {
         "[Oceanic Next]": {
             // Give status bar default colours of activity bar:
@@ -20,7 +19,7 @@
 		    "editorCursor.foreground": "#FAC863",
             "terminalCursor.foreground": "#FAC863",
             "terminalCursor.background": "#FAC863",
-            "panel.background": "#16222a" // background colour (#1b2b34) darkened by 20%
+            "panel.background": "#16222a", // background colour (#1b2b34) darkened by 20%
         }
     },
     "workbench.iconTheme": "material-icon-theme",
@@ -28,9 +27,18 @@
     "material-icon-theme.saturation": 0.8,
     "terminal.integrated.defaultProfile.osx": "bash",
     "telemetry.telemetryLevel": "off",
-    "gitlens.telemetry.enabled": false,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorWidth": 2,
-    "workbench.panel.defaultLocation": "right"
+    "workbench.panel.defaultLocation": "right",
+    "files.eol": "\n",
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": false,
+    "[quarto]": {
+        "editor.rulers": [100]
+    },
+    "[rmd]": {
+        "editor.rulers": [100]
+    },
+    "editor.renderWhitespace": "trailing"
 }
