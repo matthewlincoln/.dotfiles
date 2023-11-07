@@ -40,5 +40,6 @@
     "[rmd]": {
         "editor.rulers": [100]
     },
-    "editor.renderWhitespace": "trailing"
+    "editor.renderWhitespace": "trailing",
+    "editor.copyWithSyntaxHighlighting": false
 }
