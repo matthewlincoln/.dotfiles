@@ -41,5 +41,7 @@
         "editor.rulers": [100]
     },
     "editor.renderWhitespace": "trailing",
-    "editor.copyWithSyntaxHighlighting": false
+    "editor.copyWithSyntaxHighlighting": false,
+    "quarto.visualEditor.spellingDictionary": "en_CA",
+    "files.insertFinalNewline": true
 }
