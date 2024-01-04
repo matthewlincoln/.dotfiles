@@ -16,7 +16,7 @@
             "statusBarItem.remoteBackground": "#333333",
             "statusBarItem.remoteForeground": "#ffffff66",
             "editorCursor.background": "#FAC863",
-		    "editorCursor.foreground": "#FAC863",
+            "editorCursor.foreground": "#FAC863",
             "terminalCursor.foreground": "#FAC863",
             "terminalCursor.background": "#FAC863",
             "panel.background": "#16222a", // background colour (#1b2b34) darkened by 20%
