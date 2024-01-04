@@ -20,6 +20,7 @@
             "terminalCursor.foreground": "#FAC863",
             "terminalCursor.background": "#FAC863",
             "panel.background": "#16222a", // background colour (#1b2b34) darkened by 20%
+            "editorGutter.background": "#18272f", // background colour (#1b2b34) darkened by 10%
         }
     },
     "workbench.iconTheme": "material-icon-theme",
@@ -32,7 +33,7 @@
     "terminal.integrated.cursorWidth": 2,
     "workbench.panel.defaultLocation": "right",
     "files.eol": "\n",
-    "editor.occurrencesHighlight": false,
+    "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
     "[quarto]": {
         "editor.rulers": [100]
