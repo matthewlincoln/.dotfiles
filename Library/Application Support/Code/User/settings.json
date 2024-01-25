@@ -35,6 +35,10 @@
     "files.eol": "\n",
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
+    "[markdown]": {
+        "editor.rulers": [100],
+        "editor.lineNumbers": false
+    },
     "[quarto]": {
         "editor.rulers": [100]
     },
