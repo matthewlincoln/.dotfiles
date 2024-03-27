@@ -24,12 +24,6 @@ $endfor$
 ]{$if(class)$$class$$else$scrartcl$endif$}
 \usepackage{amsmath,amssymb}
 % \usepackage[retainmissing]{MnSymbol}
-% $if(fontfamily)$
-% \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-% $else$
-% \usepackage{lmodern}
-% \usepackage{fontspec}
-% $endif$
 \usepackage{etoolbox}
 $if(linestretch)$
 \usepackage{setspace}
@@ -50,16 +44,24 @@ $endif$
   % \defaultfontfeatures[\rmfamily]{Scale=1.008249312557287} % use postscript pt
 $if(mathspec)$
   \ifXeTeX
-    \usepackage{mathspec}
+    \usepackage{mathspec} % this also loads fontspec
   \else
-    \usepackage{unicode-math}
+    \usepackage{unicode-math} % this also loads fontspec
   \fi
 $else$
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
 $endif$
 
 $if(mainfont)$
-  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+  $if(mainfontfallback)$
+    \ifLuaTeX
+      \usepackage{luaotfload}
+      \directlua{luaotfload.add_fallback("mainfontfallback",{
+        $for(mainfontfallback)$"$mainfontfallback$"$sep$,$endfor$
+      })}
+    \fi
+  $endif$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
 $else$
   \setmainfont[
     Ligatures = TeX,
@@ -77,7 +79,15 @@ $else$
   ]{HelveticaNeue}
 $endif$
 $if(sansfont)$
-  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+  $if(sansfontfallback)$
+    \ifLuaTeX
+      \usepackage{luaotfload}
+      \directlua{luaotfload.add_fallback("sansfontfallback",{
+        $for(sansfontfallback)$"$sansfontfallback$"$sep$,$endfor$
+      })}
+    \fi
+  $endif$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$$if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$sansfont$}
 $else$
   \setsansfont[
     Ligatures = TeX,
@@ -94,7 +104,15 @@ $else$
   ]{HelveticaNeue}
 $endif$
 $if(monofont)$
-  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+  $if(monofontfallback)$
+    \ifLuaTeX
+      \usepackage{luaotfload}
+      \directlua{luaotfload.add_fallback("monofontfallback",{
+        $for(monofontfallback)$"$monofontfallback$"$sep$,$endfor$
+      })}
+    \fi
+  $endif$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$monofont$}
 $else$
   \setmonofont{Menlo}[Scale=MatchUppercase]
 $endif$
@@ -291,9 +309,17 @@ $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
 \DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
 $endif$
+$if(svg)$
+\usepackage{svg}
+$endif$
 $if(strikeout)$
 $-- also used for underline
-\usepackage[normalem]{ulem}
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+\fi
 $endif$
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
@@ -303,43 +329,70 @@ $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
+$if(subfigure)$
+\usepackage{subcaption}
+$endif$
 $if(block-headings)$
 % Make \paragraph and \subparagraph free-standing
+% \makeatletter
 % \ifx\paragraph\undefined\else
 %   \let\oldparagraph\paragraph
-%   \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+%   \renewcommand{\paragraph}{
+%     \@ifstar
+%       \xxxParagraphStar
+%       \xxxParagraphNoStar
+%   }
+%   \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+%   \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 % \fi
 % \ifx\subparagraph\undefined\else
 %   \let\oldsubparagraph\subparagraph
-%   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+%   \renewcommand{\subparagraph}{
+%     \@ifstar
+%       \xxxSubParagraphStar
+%       \xxxSubParagraphNoStar
+%   }
+%   \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+%   \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 % \fi
+% \makeatother
 $endif$
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
 $if(csl-refs)$
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{0.25in}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{0.25in}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
   % turn on hanging indent if param 1 is 1
   \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
   \fi
   % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
 \usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
 $if(lang)$
@@ -350,9 +403,18 @@ $if(lang)$
 \fi
 $if(babel-lang)$
 \babelprovide[main,import]{$babel-lang$}
+$if(mainfont)$
+\ifPDFTeX
+\else
+\babelfont{rm}[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
+\fi
+$endif$
 $endif$
 $for(babel-otherlangs)$
 \babelprovide[import]{$babel-otherlangs$}
+$endfor$
+$for(babelfonts/pairs)$
+\babelfont[$babelfonts.key$]{rm}{$babelfonts.value$}
 $endfor$
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
@@ -389,9 +451,9 @@ $endif$
 $if(csquotes)$
 \usepackage{csquotes}
 $endif$
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{$if(urlstyle)$$urlstyle$$else$same$endif$}
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allow verbatim text in footnotes
 $endif$
